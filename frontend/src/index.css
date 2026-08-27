@@ -452,67 +452,6 @@ button, input, select {
   height: 0.4rem;
 }
 
-/* ---------- Collections grid (legacy .advert-box) ---------- */
-.advert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
-  gap: 3rem;
-}
-
-.advert-box {
-  position: relative;
-  color: var(--white);
-  height: 22rem;
-  border-radius: 1.6rem;
-  padding: 1.6rem;
-  overflow: hidden;
-  background-color: var(--navy);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  display: block;
-}
-
-.advert-box:hover {
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4);
-  transform: translateY(-1rem);
-}
-
-.advert-box .dotted {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border: 2px dashed var(--offwhite);
-  border-radius: 1rem;
-}
-
-.advert-box img {
-  position: absolute;
-  bottom: 0;
-  left: -20%;
-  height: 100%;
-  width: 28rem;
-  z-index: 0;
-  opacity: 0.6;
-  object-fit: cover;
-}
-
-.advert-box .content {
-  position: absolute;
-  top: 50%;
-  right: 1.4rem;
-  transform: translateY(-50%);
-  text-align: right;
-}
-
-.advert-box .content h2 {
-  color: var(--white);
-  line-height: 1.2;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 5px 6px 0 rgba(37, 59, 112, 0.1);
-}
-
 /* ---------- Product promo banner (legacy .product-banner) ---------- */
 .product-banner {
   display: grid;
@@ -738,7 +677,7 @@ button, input, select {
 }
 
 .collections-grid {
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
 }
 
 .products-grid {
@@ -746,16 +685,18 @@ button, input, select {
 }
 
 .collection-card {
+  display: block;
   background: var(--white);
-  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.15s;
-  text-align: center;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
 .collection-card:hover {
   transform: translateY(-4px);
+  border-color: transparent;
+  box-shadow: 0 1.2rem 2.4rem rgba(24, 42, 82, 0.12);
 }
 
 .collection-card-img {
@@ -768,12 +709,36 @@ button, input, select {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.collection-card h3 {
-  padding: 1.2rem;
+.collection-card:hover .collection-card-img img {
+  transform: scale(1.06);
+}
+
+.collection-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.6rem 1.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.collection-card-body h3 {
   margin: 0;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
+}
+
+.collection-card-body svg {
+  flex-shrink: 0;
+  color: var(--gray);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.collection-card:hover .collection-card-body svg {
+  transform: translateX(0.3rem);
+  color: var(--navy);
 }
 
 .product-card {

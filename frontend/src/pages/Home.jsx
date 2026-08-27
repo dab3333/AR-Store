@@ -151,16 +151,23 @@ export default function Home() {
             {collections.length === 0 ? (
               <EmptyState label="No collections available yet." />
             ) : (
-              <div className="advert-grid">
+              <div className="grid collections-grid">
                 {collections.map((c) => (
-                  <a key={c.id} href={`#collection-${c.id}`}>
-                    <div className="advert-box">
-                      <div className="dotted">
-                        <div className="content">
-                          <h2>{c.name}</h2>
-                        </div>
-                      </div>
-                      <img src={c.imageUrl || "/placeholder.svg"} alt="" />
+                  <a key={c.id} href={`#collection-${c.id}`} className="collection-card">
+                    <div className="collection-card-img">
+                      <img src={c.imageUrl || "/placeholder.svg"} alt="" loading="lazy" />
+                    </div>
+                    <div className="collection-card-body">
+                      <h3>{c.name}</h3>
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                        <path
+                          d="M5 12h14M13 6l6 6-6 6"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </div>
                   </a>
                 ))}
