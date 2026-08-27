@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:arstore;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  mail:
+    host: localhost
+    port: 3025
+    username: test
+    password: test
+
+app:
+  jwt:
+    secret: test-only-jwt-secret-key-not-used-in-production-32bytes
+    expiration-ms: 3600000
+    issuer: ar-store-test
+  mail:
+    from: no-reply@arstore.local
+  frontend:
+    base-url: http://localhost:5173
+  cors:
+    allowed-origins: http://localhost:5173
+  recaptcha:
+    secret-key: test-secret
+    verify-url: http://localhost:9999/siteverify
+    enabled: false

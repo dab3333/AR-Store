@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collections>
+  <collection id="dota" name="DOTA Collection">
+    <image>../uploads/dota_advert.png</image>
+    <product>
+      <id>1</id>
+      <name>Lion Shirt</name>
+      <image>Lion.png</image>
+      <price>245</price>
+      <rating>3</rating>
+      <stock>44</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Lion-Tshirt-Unisex-dota-2-Custom-Finger-of-Death-T-shirt-for-men-and-women-i.33699891.6817320867</url>
+    </product>
+    <product>
+      <id>2</id>
+      <name>Zeus Shirt</name>
+      <image>Zeus.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>44</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Zeus-Tshirt-Unisex-dota-2-Custom-Zues-gamer-T-shirt-for-men-and-women-Ar-Store-i.33699891.5817333435?sp_atk=75b479d9-b9d8-4cf3-a729-15fb56eeda4c</url>
+    </product>
+    <product>
+      <id>3</id>
+      <name>Slark Shirt</name>
+      <image>Slark.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>41</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Slark-Tshirt-Unisex-dota-2-Custom-Shark-Gamer-T-shirt-for-men-and-women-AR-store-i.33699891.5817333115?sp_atk=bc0c2a28-6854-49ad-8fb4-02372715d875</url>
+    </product>
+    <product>
+      <id>4</id>
+      <name>Pudge Shirt</name>
+      <image>Pudge.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>40</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Pudge-Tshirt-Unisex-dota-2-Fresh-Meat-Custom-T-shirt-for-men-and-women-i.33699891.3517416185?sp_atk=956db48f-80ce-43c5-bd68-8848211f8239</url>
+    </product>
+    <product>
+      <id>5</id>
+      <name>Sven Shirt</name>
+      <image>Sven.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>41</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Sven-Tshirt-Unisex-dota-2-God-strength-Custom-gamer-T-shirt-for-men-and-women-i.33699891.7817576687?sp_atk=7b3016fc-1f81-48e8-a094-0aa059a14a6d</url>
+    </product>
+    <product>
+      <id>7</id>
+      <name>Shadow Fiend Shirt</name>
+      <image>ShadowFiend.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Shadow-Fiend-Tshirt-Unisex-dota-2-Custom-SF-nevermore-T-shirt-for-men-and-women-Ar-store-i.33699891.7517332284?sp_atk=71e52909-ddd0-47d8-b8bf-5142ed0b1e87</url>
+    </product>
+    <product>
+      <id>8</id>
+      <name>Wind Ranger Shirt</name>
+      <image>WindRanger.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>48</stock>
+      <url>https://shopee.ph/Dota2-Shirt-Wind-Ranger-Tshirt-Unisex-dota-2-Custom-WR-windranger-GAMER-T-shirt-for-men-and-women-i.33699891.4117332751?sp_atk=50bdf386-1687-4e85-9c04-3a9e4f208275</url>
+    </product>
+    <product>
+      <id>9</id>
+      <name>Earth Shaker</name>
+      <image>../uploads/EarthShaker.png</image>
+      <price>245</price>
+      <stock>44</stock>
+      <rating>5</rating>
+    </product>
+  </collection>
+  <collection id="witcher" name="The Witcher Collection">
+    <image>../uploads/witcher_advert.png</image>
+    <product>
+      <id>101</id>
+      <name>Wild Hunt Shirt</name>
+      <image>WildHunt.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/The-Witcher-3-Wildhunt-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-i.33699891.7210549888?sp_atk=e91095ce-ae60-4e8c-ab3b-1b4bb0384a5c</url>
+    </product>
+    <product>
+      <id>102</id>
+      <name>Toss a Coin Shirt</name>
+      <image>Toss.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Netflix-The-Witcher-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-v5-i.33699891.4212908477?sp_atk=85a59ad9-0a97-4a11-9888-6eefe1acbc73</url>
+    </product>
+    <product>
+      <id>103</id>
+      <name>3 Symbol Shirt</name>
+      <image>3symb.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/The-Witcher-3-Symbols-Quen-Igni-Axii-Ard-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-i.33699891.3210871995?sp_atk=207e2bba-e91c-4721-b5c6-c48f1252b338</url>
+    </product>
+    <product>
+      <id>104</id>
+      <name>The Witcher Shirt</name>
+      <image>thewitcher.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Netflix-The-Witcher-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-v6-i.33699891.3813143595?sp_atk=e0d5f8ef-b674-42d1-8437-99fd7f6d33fa</url>
+    </product>
+    <product>
+      <id>105</id>
+      <name>Wild Hunt Shirt</name>
+      <image>witcher.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>48</stock>
+      <url>https://shopee.ph/The-Witcher-3-Wildhunt-Tshirt-unisex-Tees-Witcher-v2-Gamer-T-shirt-Ar-Store-i.33699891.4310708723?sp_atk=e115a3ba-4f78-4a85-a099-8ddf85345cb6</url>
+    </product>
+    <product>
+      <id>106</id>
+      <name>Toss a Coin Shirt</name>
+      <image>toss1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/Netflix-The-Witcher-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-v5-i.33699891.4212908477?sp_atk=85a59ad9-0a97-4a11-9888-6eefe1acbc73</url>
+    </product>
+    <product>
+      <id>107</id>
+      <name>3 Symbol Shirt</name>
+      <image>3symb1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/The-Witcher-3-Symbols-Quen-Igni-Axii-Ard-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-i.33699891.3210871995?sp_atk=207e2bba-e91c-4721-b5c6-c48f1252b338</url>
+    </product>
+    <product>
+      <id>108</id>
+      <name>The Witcher Shirt</name>
+      <image>witcher1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Netflix-The-Witcher-Tshirt-Custom-unisex-Tees-Witcher-Gamer-T-shirt-Ar-Store-v6-i.33699891.3813143595?sp_atk=e0d5f8ef-b674-42d1-8437-99fd7f6d33fa</url>
+    </product>
+  </collection>
+  <collection id="evolution" name="Evolution Collection">
+    <image>../uploads/evol_advert.png</image>
+    <product>
+      <id>201</id>
+      <name>Vlogger Shirt</name>
+      <image>vlogger.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Vlogger-Evolution-to-Profession-Tshirt-Unisex-Youtuber-Shirt-custom-Tees-i.33699891.6808318676?sp_atk=a6171d49-3268-46f1-a806-63a58ac330cd</url>
+    </product>
+    <product>
+      <id>202</id>
+      <name>Doctor Shirt</name>
+      <image>doctor.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Doctor-Evolution-to-Profession-Tshirt-Unisex-Medical-personnel-Shirt-custom-Tees-i.33699891.5908360339?sp_atk=35310300-ad3e-4f46-b3d4-c9fcce7a0271</url>
+    </product>
+    <product>
+      <id>203</id>
+      <name>Programmer Shirt</name>
+      <image>programmer.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-IT-Programmer-Evolution-to-Profession-Tshirt-Unisex-Hacker-Shirt-custom-Tees-i.33699891.5308313282?sp_atk=83fe7617-3c8b-4568-aba4-ce96dcbf5f9d</url>
+    </product>
+    <product>
+      <id>204</id>
+      <name>Guitarist Shirt</name>
+      <image>guitarist.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>48</stock>
+      <url>https://shopee.ph/AR-store-Guitarist-Evolution-to-Profession-Tshirt-Unisex-Medical-personnel-Shirt-custom-Tees-i.33699891.5108368913?sp_atk=d9054782-5080-4d05-8de3-33aa8bc9675b</url>
+    </product>
+    <product>
+      <id>205</id>
+      <name>Military Shirt</name>
+      <image>military.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Military-Evolution-to-Profession-Tshirt-Unisex-Soldier-Shirt-custom-Tees-i.33699891.3608406849?sp_atk=45d34f1d-ff4f-449d-95e9-c568df751475</url>
+    </product>
+    <product>
+      <id>206</id>
+      <name>Drummer Shirt</name>
+      <image>drummer.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Drummer-Evolution-to-Profession-Tshirt-Unisex-Medical-personnel-Shirt-custom-Tees-i.33699891.7308364951?sp_atk=1917bd05-fa2f-4f20-aa6a-3bcc1f144035</url>
+    </product>
+    <product>
+      <id>207</id>
+      <name>Chef Shirt</name>
+      <image>chef.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>48</stock>
+      <url>https://shopee.ph/AR-store-Chef-tshirt-Evolution-to-Profession-Tshirt-Unisex-Kitchen-Master-Shirt-custom-Tees-i.33699891.3608450793?sp_atk=bbc67e49-1155-4b6f-a472-ae117f590b26</url>
+    </product>
+    <product>
+      <id>208</id>
+      <name>Engineer Shirt</name>
+      <image>Engineer.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Engineer-Evolution-to-Profession-Tshirt-Unisex-Shirt-custom-Tees-for-women-and-men-i.33699891.4908302421?sp_atk=b4d74b03-2777-49f9-bb1c-7e1326ada547</url>
+    </product>
+  </collection>
+  <collection id="moneyHeist" name="Money Heist Collection">
+    <image>../uploads/moneyHeist_advert.png</image>
+    <product>
+      <id>301</id>
+      <name>The Resistance Shirt</name>
+      <image>Resistance.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>0</stock>
+      <url>https://shopee.ph/-AR-STORE-La-Casa-De-Papel-(Money-Heist)-THE-RESISTANCE-Customized-Shirt-Unisex-i.33699891.7905148961?sp_atk=7b0fc748-7702-4fcd-9340-98ce979d69de</url>
+    </product>
+    <product>
+      <id>302</id>
+      <name>Professor Shirt</name>
+      <image>professor.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/El-PRofessor-and-Dali-mask-Sergio-Marquina-Money-Heist-LACASA-DE-PAPEL-tshirt-AR-store-Unisex-Shirt-i.33699891.2893264775?sp_atk=63523050-fa2a-437e-9933-401b1cc6eeac</url>
+    </product>
+    <product>
+      <id>303</id>
+      <name>Tokyo Shirt</name>
+      <image>tokyo.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/AR-STORE-Tokyo-Money-Heist-LACASA-DE-PAPEL-tshirt-AR-store-Unisex-Shirt-i.33699891.4603444947?sp_atk=47669817-a9d1-488a-a910-1eff40174132</url>
+    </product>
+    <product>
+      <id>304</id>
+      <name>Bella Ciao Shirt</name>
+      <image>bellaciao.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>46</stock>
+      <url>https://shopee.ph/Money-Heist-La-Casa-De-Papel-Bella-Ciao-Tshirt-AR-store-Bellaciao-T-shirt-for-men-and-women-i.33699891.5500732428?sp_atk=f78e7bc8-3490-4966-8404-3a68033b891d</url>
+    </product>
+    <product>
+      <id>305</id>
+      <name>Dali Mask Shirt</name>
+      <image>dali.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-STORE-Money-Heist-Lacasa-depapel-Unisex-Tshirt-Dali-Mask-Shirt-for-women-and-men-i.33699891.2818549835?sp_atk=1867d91c-c473-4ac2-884f-07468ba8dced</url>
+    </product>
+    <product>
+      <id>306</id>
+      <name>Tokyo Shirt</name>
+      <image>tokyo1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-La-Casa-De-Papel-(Money-Heist)-Tokyo-customized-shirt-unisex-i.33699891.3905227613?sp_atk=4d5892b7-7719-4124-be64-c15cb78a62ea</url>
+    </product>
+    <product>
+      <id>307</id>
+      <name>Bella Ciao Shirt</name>
+      <image>Bellaciao1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-LA-CASA-DE-PAPEL-(MONEY-HEIST)-BELLA-CIAO-OUTLINE-CUSTOMIZED-TSHIRT-UNISEX-SHIRT-i.33699891.6513842760?sp_atk=ed1f1f32-6b77-4e07-9d7a-5a8c2d4bd95d</url>
+    </product>
+    <product>
+      <id>308</id>
+      <name>Half Face Logo Shirt</name>
+      <image>half face.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-La-Casa-De-Papel-Money-Heist-Half-Face-Logo-Customized-Shirt-Unisex-i.33699891.6905147376?sp_atk=83c52f27-bdd5-48be-8097-c88b64313a85</url>
+    </product>
+  </collection>
+  <collection id="naruto" name="Naruto Collection">
+    <image>../uploads/naruto_advert.png</image>
+    <product>
+      <id>401</id>
+      <name>Team 7 Shirt</name>
+      <image>team7.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Naruto-shirt-Team-7-Konoha-Tshirt-for-men-and-women-i.33699891.11346151763?sp_atk=b6b7d2f2-45b0-4d12-abfb-d37225939899</url>
+    </product>
+    <product>
+      <id>402</id>
+      <name>Kakashi Shirt</name>
+      <image>kakashi.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/naruto-shirt-AR-STORE-NARUTO-anbu-kakashi-symbol-Tshirt-pocket-size-Custom-unisex-tees-i.33699891.6402497604?sp_atk=5a588cb3-b954-4250-9a89-a1ff5b403f1f</url>
+    </product>
+    <product>
+      <id>403</id>
+      <name>Akatsuki Shirt</name>
+      <image>akatsuki.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-STORE-NARUTO-AKATSUKI-T-shirt-pocket-size-Custom-Tshirt-unisex-tees-i.33699891.3602588496?sp_atk=d729494c-ccd0-47c5-9bf5-65b4d531c465</url>
+    </product>
+    <product>
+      <id>404</id>
+      <name>Hokage Shirt</name>
+      <image>hokage.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/naruto-shirt-AR-STORE-NARUTO-Hokage-symbol-Tshirt-Custom-unisex-tees-i.33699891.5202512695?sp_atk=9a79fe60-8732-4789-8379-c488e7065f00</url>
+    </product>
+    <product>
+      <id>405</id>
+      <name>Uchiha Shirt</name>
+      <image>uchiha.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-STORE-NARUTO-uchiha-sasuke-symbol-Tshirt-pocket-size-Custom-unisex-tees-i.33699891.7402486000?sp_atk=da4848f8-dcf1-4805-b0a5-63b32d790b28</url>
+    </product>
+    <product>
+      <id>406</id>
+      <name>Naruto Shirt</name>
+      <image>naruto.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/NARUTO-tshirt-Custom-naruto-shirt-unisex-Tees-AR-Store-i.33699891.7702504182?sp_atk=3d98d234-ce26-49d5-926d-213dcaf129be</url>
+    </product>
+    <product>
+      <id>407</id>
+      <name>Konoha Shirt</name>
+      <image>konoha.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/naruto-shirt-AR-STORE-NARUTO-Konoha-symbol-Tshirt-pocket-size-Custom-unisex-tees-i.33699891.6302482619?sp_atk=1ed88c11-8630-4323-82fe-ccec55593f37</url>
+    </product>
+    <product>
+      <id>408</id>
+      <name>Team 7 Shirt</name>
+      <image>team71.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Naruto-shirt-Team-7-Konoha-Tshirt-for-men-and-women-i.33699891.11346151763?sp_atk=b6b7d2f2-45b0-4d12-abfb-d37225939899</url>
+    </product>
+  </collection>
+  <collection id="weBareBears" name="We Bare Bears Collection">
+    <image>../uploads/weBareBears_advert.png</image>
+    <product>
+      <id>501</id>
+      <name>Panda Shirt</name>
+      <image>squishpanda.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-We-Bare-Bears-Squished-Panda-Pocket-Sized-Print-Customized-Shirt-Unisex-tshirt-i.33699891.6610164642?sp_atk=9f81c8ec-6063-4365-81f7-45197e6ac0cf</url>
+    </product>
+    <product>
+      <id>502</id>
+      <name>Grizzly Shirt</name>
+      <image>grizzly.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-WE-BARE-BEARS-PANDA-GRIZZ-PANDA-CUSTOMIZED-SHIRT-UNISEX-TSHIRT-i.33699891.4609953914?sp_atk=84edcc20-693b-4d14-9cd6-bd4c0d2e459f</url>
+    </product>
+    <product>
+      <id>503</id>
+      <name>Ice Bear Shirt</name>
+      <image>icebear.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>49</stock>
+      <url>https://shopee.ph/-AR-STORE-WE-BARE-BEARS-PANDA-GRIZZ-PANDA-CUSTOMIZED-SHIRT-UNISEX-TSHIRT-i.33699891.4609953914?sp_atk=84edcc20-693b-4d14-9cd6-bd4c0d2e459f</url>
+    </product>
+    <product>
+      <id>504</id>
+      <name>Panda Shirt</name>
+      <image>panda.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-WE-BARE-BEARS-PANDA-GRIZZ-PANDA-CUSTOMIZED-SHIRT-UNISEX-TSHIRT-i.33699891.4609953914?sp_atk=84edcc20-693b-4d14-9cd6-bd4c0d2e459f</url>
+    </product>
+    <product>
+      <id>505</id>
+      <name>Sleepy Bear Shirt</name>
+      <image>sleepy.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-We-Bare-Bears-Sleepy-Ice-Bear-Grizzly-Bear-Panda-bear-customized-shirt-unisex-tshirt-i.33699891.7110157439?sp_atk=4ec8c6c3-ef00-49bd-826b-292db55c5d10</url>
+    </product>
+    <product>
+      <id>506</id>
+      <name>Grizzly Shirt</name>
+      <image>grizzly1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>47</stock>
+      <url>https://shopee.ph/AR-Store-We-Bare-Bears-Grizzly-Squished-cheeks-pocket-Sized-Print-Customized-Shirt-Unisex-Tshirt-i.33699891.3810258869?sp_atk=e040724d-ed5a-4f0d-ac89-39079f5bc214</url>
+    </product>
+    <product>
+      <id>507</id>
+      <name>Panda Shirt</name>
+      <image>panda1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-We-Bare-Bears-Squished-Panda-Pocket-Sized-Print-Customized-Shirt-Unisex-tshirt-i.33699891.6610164642?sp_atk=9f81c8ec-6063-4365-81f7-45197e6ac0cf</url>
+    </product>
+    <product>
+      <id>508</id>
+      <name>Gudetama Shirt</name>
+      <image>gudetama.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-WE-BARE-BEARS-GUDETAMA-VERSION-POCKET-SIZED-PRINT-CUSTOMIZED-SHIRT-UNISEX-TSHIRT-i.33699891.3710232886?sp_atk=0b9ace98-ba7f-43e4-9e1a-aef2be219497</url>
+    </product>
+  </collection>
+  <collection id="featured" name="Featured Collection">
+    <image>../uploads/featured_advert.png</image>
+    <product>
+      <id>601</id>
+      <name>We Bare Bear Shirt</name>
+      <image>we bare bear ft1.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-WE-BARE-BEARS-PANDA-GRIZZ-PANDA-CUSTOMIZED-SHIRT-UNISEX-TSHIRT-qNy1-i.569655195.15506770085?sp_atk=0662e76f-3a66-43ef-9027-1c51c5850bc6</url>
+      <collection>weBareBears</collection>
+    </product>
+    <product>
+      <id>602</id>
+      <name>Money Heist Tshirt</name>
+      <image>professor.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/%E3%80%90Spot-goods%E3%80%91%E2%98%82El-PRofessor-and-Dali-mask-Sergio-Marquina-Money-Heist-LACASA-DE-PAPEL-tshirt-AR-store-i.612968512.15623412888?sp_atk=ae5a6a29-3703-48cc-ab5e-ee07ae8503f5</url>
+      <collection>moneyHeist</collection>
+    </product>
+    <product>
+      <id>603</id>
+      <name>Peace &amp; Pride Shirt</name>
+      <image>prideBlack.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Peace-and-Pride-Tshirt-LGBT-community-unisex-Shirt-i.33699891.2728365761?sp_atk=0b5ed5b6-75a9-41ea-ba9f-581941c89671</url>
+      <collection>pride</collection>
+    </product>
+    <product>
+      <id>604</id>
+      <name>C.L.O.Y shirt</name>
+      <image>crashWhite.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Crash-landing-on-you-Tshirt-Korea-novela-shirt-Se-ri-Ri-T-shirt-for-men-and-women-i.33699891.5118004236?sp_atk=20e5c577-e6b7-4981-a100-71a87bdee087</url>
+      <collection>crashLanding</collection>
+    </product>
+    <product>
+      <id>605</id>
+      <name>Prison Break Shirt</name>
+      <image>faithBlack.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/PrisonBreak-Tshirt-Have-a-little-Faith-v1-Prison-Break-T-shirt-for-men-and-women-AR-store-i.33699891.4535710313?sp_atk=e0221f38-be36-42f8-9660-30c512b7a51d</url>
+      <collection>prisonBreak</collection>
+    </product>
+    <product>
+      <id>606</id>
+      <name>YouTube Shirt</name>
+      <image>ytWhite.png</image>
+      <price>250</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-store-Youtuber-Shirt-Youtube-Tshirt-Vlogger-T-shirt-for-man-and-women-customizable-shirt-i.33699891.5719780049?sp_atk=deb24c47-e27c-4176-9ede-711fe9e13524</url>
+      <collection>youtube</collection>
+    </product>
+    <product>
+      <id>607</id>
+      <name>F Society Shirt</name>
+      <image>BlackFSociety.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/F-society-Mr-Robot-Custom-Tshirt-Unisex-Mr.-robot-Shirt-AR-store-IT-Hacker-Dark-Army-Tees-i.33699891.2725046595?sp_atk=a660ac2e-02d0-4bdf-b36f-d9196c8f2014</url>
+      <collection>fsociety</collection>
+    </product>
+    <product>
+      <id>608</id>
+      <name>Stranger Things Shirt</name>
+      <image>hawkinsBlack.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/HAWKINS-MIDDLE-SCHOOL-Stranger-Things-Tshirt-Tee-custom-Unisex-shirt-AR-STORE-i.33699891.2622648230?sp_atk=a7752a60-38ed-4a03-ad7f-1b883c494e0a</url>
+      <collection>strangerThings</collection>
+    </product>
+  </collection>
+  <collection id="latest" name="Latest Collection">
+    <image>../uploads/latest_advert.png</image>
+    <product>
+      <id>701</id>
+      <name>One Piece Shirt</name>
+      <image>OnePiece.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/-AR-STORE-One-Piece-White-Beard-Pocket-Sized-Print-Custom-Tees-Unisex-Tshirt-for-Men-and-Women-i.33699891.7019357878?sp_atk=d2bb9795-9e96-4d02-98ce-4853e5098707</url>
+      <collection>onePiece</collection>
+    </product>
+    <product>
+      <id>702</id>
+      <name>Golden State Tshirt</name>
+      <image>GSState.png</image>
+      <price>240</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-Store-NBA-Golden-State-Warriors-T-shirt-Curry-Tshirt-Thompson-Shirt-Unisex-for-Women-and-Men-i.33699891.7674035612?sp_atk=da5902b9-c148-49ef-b37d-d1b62a8f60f7</url>
+      <collection>nba</collection>
+    </product>
+    <product>
+      <id>703</id>
+      <name>Face Off Shirt</name>
+      <image>FaceOff.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/IT%E2%80%99S-ABOUT-DRIVE-IT%E2%80%99S-ABOUT-POWER-tshirt-unisex-Rock-T-shirt-Face-off-shirt-for-men-and-women-i.33699891.14710124864?sp_atk=b8c1359d-bd8c-4cbc-825b-77120e405d63</url>
+      <collection>wrestling</collection>
+    </product>
+    <product>
+      <id>704</id>
+      <name>LA Lakers Shirt</name>
+      <image>lakers.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Ar-Store-NBA-LOS-Angeles-LAKERS-Kobe-Lebron-Tshirt-nba-2k20-Gold-edition-i.33699891.7904693546?sp_atk=f4494dfc-71de-40a6-bf12-4ac3e395362c</url>
+      <collection>nba</collection>
+    </product>
+    <product>
+      <id>705</id>
+      <name>Naruto Team 7 Shirt</name>
+      <image>Team7.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-STORE-Naruto-Team-7-Shirt-Kakashi-Naruto-Sasuke-Sakura-Tshirt-i.33699891.1234567890</url>
+      <collection>naruto</collection>
+    </product>
+    <product>
+      <id>706</id>
+      <name>Running Man Shirt</name>
+      <image>runningMan.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-Store-K-Running-Man-Tshirt-Unisex-Tees-For-Men-and-Women-i.33699891.6715708256?sp_atk=0c1f5732-8134-4141-91c8-fe6329188d39</url>
+      <collection>runningMan</collection>
+    </product>
+    <product>
+      <id>707</id>
+      <name>SVEN Shirt</name>
+      <image>sven.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/Ar-store-Sven-shirt-Pewdiepie-Merch-bro-armies-Minecraft-series-i.33699891.2586665113?sp_atk=841bb34b-af10-497e-a60f-5647824db4d8</url>
+      <collection>pewdiepie</collection>
+    </product>
+    <product>
+      <id>708</id>
+      <name>Barbie Shirt</name>
+      <image>Barbie.png</image>
+      <price>245</price>
+      <rating>5</rating>
+      <stock>50</stock>
+      <url>https://shopee.ph/AR-STORE-STATEMENT-SHIRT-Sabi-ko-na-'Barbie'-Tshirt-Unisex-Tees-For-Men-and-Women-i.33699891.3917109470?sp_atk=009550af-7130-40ba-98cc-6b757c4e32bb</url>
+      <collection>statement</collection>
+    </product>
+  </collection>
+  <collection id="col68332afb718cc" name="Mobile Legends Collection">
+    <image>../uploads/MLBB Collection.png</image>
+    <product>
+      <id>1</id>
+      <name>Eudora</name>
+      <image>../uploads/Eudora.png</image>
+      <price>250</price>
+      <stock>50</stock>
+      <rating>5</rating>
+    </product>
+    <product>
+      <id>3</id>
+      <name>Estes</name>
+      <image>../uploads/Estes.png</image>
+      <price>250</price>
+      <stock>46</stock>
+      <rating>5</rating>
+    </product>
+    <product>
+      <id>4</id>
+      <name>Granger</name>
+      <image>../uploads/Granger.png</image>
+      <price>500</price>
+      <stock>100</stock>
+      <rating>5</rating>
+    </product>
+    <product>
+      <id>5</id>
+      <name>Ling</name>
+      <image>../uploads/Ling.png</image>
+      <price>250</price>
+      <stock>44</stock>
+      <rating>5</rating>
+    </product>
+  </collection>
+</collections>
