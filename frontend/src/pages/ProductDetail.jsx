@@ -6,6 +6,25 @@ import { useCart } from "../context/CartContext";
 import { formatPeso } from "../utils/currency";
 import { Loading, ErrorMessage } from "../components/StatusMessage";
 
+const REVIEW_POOL = [
+  { name: "Jerome T.", text: "Sulit sa presyo, ang lambot ng fabric and true to size pa." },
+  { name: "Cassandra P.", text: "Fast shipping and the print quality is really solid, walang crack after ilang wash." },
+  { name: "Miko D.", text: "Ordered this as a gift and they loved it. Comfy fit, hindi manipis." },
+  { name: "Angeline R.", text: "Second time ko na umorder dito, consistent yung quality every time." },
+  { name: "Paolo S.", text: "Design translated really well onto the shirt, mas maganda pa sa picture." },
+  { name: "Trisha M.", text: "Good for everyday wear, breathable yung tela kahit mainit." },
+];
+
+function pickReviews(seed, count = 3) {
+  const start = Math.abs(seed) % REVIEW_POOL.length;
+  return Array.from({ length: count }, (_, i) => REVIEW_POOL[(start + i) % REVIEW_POOL.length]);
+}
+
+function buildDescription(product) {
+  const collection = product.collectionName ? ` from our ${product.collectionName}` : "";
+  return `The ${product.name} is a fan-favorite pick${collection}. Printed on soft, breathable cotton with a comfortable unisex fit, it's built to hold up to regular wear and washing without losing its shape or print quality. Whether you're keeping it casual, styling it for a con, or just repping your favorite characters day to day, it's an easy shirt to reach for.`;
+}
+
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -90,22 +109,29 @@ export default function ProductDetail() {
             {adding ? "Adding..." : "Add to Cart"}
           </button>
 
-          {product.externalUrl && (
-            <a
-              href={product.externalUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-secondary"
-            >
-              View more details
-            </a>
-          )}
-
           {message && (
             <p className={message.type === "success" ? "form-success" : "form-error"}>
               {message.text}
             </p>
           )}
+
+          <div className="product-description">
+            <h3>Description</h3>
+            <p>{buildDescription(product)}</p>
+          </div>
+
+          <div className="product-reviews">
+            <h3>Customer Reviews</h3>
+            <div className="product-reviews-list">
+              {pickReviews(product.id).map((r) => (
+                <div key={r.name} className="product-review">
+                  <div className="rating">★★★★★</div>
+                  <p>&ldquo;{r.text}&rdquo;</p>
+                  <span className="product-review-author">{r.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

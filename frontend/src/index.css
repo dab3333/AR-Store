@@ -830,6 +830,53 @@ button, input, select {
   margin-bottom: 1rem;
 }
 
+.product-description,
+.product-reviews {
+  margin-top: 2.8rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.product-description h3,
+.product-reviews h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.product-description p {
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+.product-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.product-review {
+  background: var(--sky-light);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.8rem;
+}
+
+.product-review .rating {
+  color: var(--teal);
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.product-review p {
+  margin-bottom: 0.6rem;
+  color: var(--navy);
+}
+
+.product-review-author {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--gray);
+}
+
 @media (max-width: 800px) {
   .product-detail-grid {
     grid-template-columns: 1fr;
