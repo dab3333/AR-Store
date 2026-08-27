@@ -278,7 +278,7 @@ button, input, select {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 60vh;
+  min-height: calc(100vh - 6.7rem);
   background-color: var(--sky);
   overflow: hidden;
   display: flex;
@@ -287,12 +287,22 @@ button, input, select {
 
 .hero-img {
   position: absolute;
-  bottom: -10%;
+  bottom: 0;
   right: 3%;
   max-width: 42vw;
+  max-height: 90%;
+  width: auto;
   height: auto;
   object-fit: contain;
   pointer-events: none;
+  /* fades the photo's hard rectangular edge into the hero background
+     instead of showing a visible cutout line */
+  -webkit-mask-image: linear-gradient(to top, #000 80%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to top, #000 80%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .hero-content {
