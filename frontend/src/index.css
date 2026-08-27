@@ -829,12 +829,24 @@ button, input, select {
 /* ---------- Auth forms ---------- */
 .auth-page {
   display: flex;
+  align-items: center;
   justify-content: center;
+  background-color: var(--sky);
   background-image: url("/website-images/wave1.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
-  min-height: calc(100vh - 20rem);
+  padding: 4rem 2rem;
+  /* this element also carries the shared .container class (max-width +
+     auto margins, for centering regular page content) but needs to span
+     the full viewport width for its background to reach the edges, and
+     fill the remaining viewport height so the background reaches the
+     footer with no gap - .app-main is a flex item with a definite
+     height, so height:100% resolves against it here */
+  max-width: none;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .auth-form {
@@ -1151,64 +1163,114 @@ button, input, select {
 
 /* ---------- Footer ---------- */
 .footer {
-  background-color: var(--footer-bg);
+  background-color: #16161f;
   color: var(--white);
-  padding: 4rem 0;
   margin-top: 4rem;
+  position: relative;
 }
 
 .footer-inner {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  padding: 5rem 2rem 3.5rem;
+}
+
+.footer-logo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
 }
 
 .footer-tag {
-  opacity: 0.8;
+  opacity: 0.65;
   font-size: 1.4rem;
+  max-width: 36rem;
+  line-height: 1.7;
+}
+
+.footer-connect h4 {
+  color: var(--white);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  margin-bottom: 1.8rem;
 }
 
 .footer-socials {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1.4rem;
-  font-size: 1.4rem;
 }
 
 .footer-socials li {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.2rem;
 }
 
 .footer-socials a {
-  padding: 0.6rem 1.4rem;
-  border-radius: 999px;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   color: var(--white);
-  font-weight: 600;
-  font-size: 1.3rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .footer-socials a:hover {
-  opacity: 0.8;
+  transform: translateY(-3px);
 }
 
-.footer-socials .fa-facebook {
+.footer-socials .fa-facebook:hover {
   background-color: #3b5998;
 }
 
-.footer-socials .fa-instagram {
-  background-color: #fb3958;
+.footer-socials .fa-instagram:hover {
+  background-color: #d6249f;
 }
 
-.footer-socials .fa-shopee {
+.footer-socials .fa-shopee:hover {
   background-color: #ee4d2d;
 }
 
-.footer-socials .fa-lazada {
-  background-color: #1a5276;
+.footer-socials .fa-lazada:hover {
+  background-color: #0f146d;
+}
+
+.footer-social-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-social-name {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.footer-social-handle {
+  font-size: 1.2rem;
+  opacity: 0.55;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.8rem 2rem;
+  font-size: 1.3rem;
+  opacity: 0.55;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Not found ---------- */
