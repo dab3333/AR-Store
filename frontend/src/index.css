@@ -1165,7 +1165,6 @@ button, input, select {
 .footer {
   background-color: #16161f;
   color: var(--white);
-  margin-top: 4rem;
   position: relative;
 }
 
