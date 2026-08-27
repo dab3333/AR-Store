@@ -851,11 +851,27 @@ button, input, select {
 
 .auth-form {
   width: 100%;
-  max-width: 44rem;
+  max-width: 40rem;
   background: var(--white);
-  padding: 3rem;
+  padding: 2.6rem;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.auth-form h1 {
+  font-size: 2.4rem;
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 2.4rem 1.4rem;
+  }
+  .auth-form {
+    padding: 2rem;
+  }
+  .auth-form h1 {
+    font-size: 2.1rem;
+  }
 }
 
 .form-field {
