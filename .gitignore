@@ -18,3 +18,11 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Legacy PHP/XML app - kept on disk as local reference only, not tracked in git
+/ProgramFiles/
+/Website Images/
+/XML files/
+/PHPMailer/
+/Testimony/
+/uploads/
