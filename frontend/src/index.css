@@ -248,9 +248,72 @@ button, input, select {
   color: var(--sky);
 }
 
-.nav-username {
-  opacity: 0.85;
-  font-size: 1.4rem;
+.cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.9rem;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background-color: var(--pink);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu-trigger {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.user-menu-trigger:hover {
+  color: var(--sky);
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  background: var(--white);
+  border-radius: 6px;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.18);
+  padding: 0.6rem;
+  min-width: 12rem;
+  z-index: 60;
+}
+
+.user-menu-dropdown .link-btn {
+  color: var(--navy) !important;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  text-decoration: none;
+}
+
+.user-menu-dropdown .link-btn:hover {
+  background-color: var(--sky-light);
+  border-radius: 4px;
 }
 
 @media (max-width: 900px) {
@@ -996,69 +1059,116 @@ button, input, select {
 .cart-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 3rem;
+  gap: 4rem;
   align-items: start;
 }
 
 .cart-list {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
 }
 
 .cart-item {
   display: grid;
-  grid-template-columns: 7rem 1fr auto auto auto;
-  gap: 1.6rem;
+  grid-template-columns: 8rem 1fr auto auto auto;
+  gap: 2rem;
   align-items: center;
-  background: var(--white);
-  padding: 1.4rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item:first-child {
+  padding-top: 0;
 }
 
 .cart-item-img {
-  width: 7rem;
-  height: 7rem;
+  width: 8rem;
+  height: 8rem;
   object-fit: cover;
-  border-radius: var(--radius);
+  border-radius: 8px;
   background-color: var(--sky-light);
 }
 
 .cart-item-info a {
   font-weight: 600;
+  color: var(--navy);
+}
+
+.cart-item-info .price {
+  font-size: 1.4rem;
+  color: var(--gray);
+  font-weight: 400;
+  margin: 0.3rem 0 0;
 }
 
 .qty-control {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
 }
 
 .qty-control button {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--white);
+  width: 3.2rem;
+  height: 3.2rem;
+  border: none;
+  background: none;
+  color: var(--navy);
   cursor: pointer;
   font-size: 1.6rem;
+  line-height: 1;
+}
+
+.qty-control button:hover:not(:disabled) {
+  background-color: var(--sky-light);
 }
 
 .qty-control button:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
+}
+
+.qty-control span {
+  min-width: 2.4rem;
+  text-align: center;
+  font-weight: 600;
 }
 
 .cart-item-subtotal {
   font-weight: 700;
+  min-width: 7rem;
+  text-align: right;
+}
+
+.remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  color: var(--gray) !important;
+  text-decoration: none !important;
+}
+
+.remove-btn:hover {
+  background-color: var(--sky-light);
+  color: var(--danger) !important;
 }
 
 .cart-summary {
   background: var(--white);
-  padding: 2.4rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  padding: 2.8rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--border);
+  position: sticky;
+  top: 8.4rem;
+}
+
+.cart-summary h2 {
+  font-size: 1.8rem;
 }
 
 .cart-summary-row {
@@ -1066,15 +1176,25 @@ button, input, select {
   justify-content: space-between;
   font-weight: 700;
   font-size: 1.8rem;
-  margin-bottom: 1.6rem;
+  padding-top: 1.6rem;
+  margin-top: 0.4rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.cart-summary .btn {
+  width: 100%;
 }
 
 @media (max-width: 900px) {
   .cart-layout {
     grid-template-columns: 1fr;
   }
+  .cart-summary {
+    position: static;
+  }
   .cart-item {
-    grid-template-columns: 5rem 1fr;
+    grid-template-columns: 6rem 1fr;
     grid-template-areas:
       "img info"
       "img qty"

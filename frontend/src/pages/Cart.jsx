@@ -76,8 +76,18 @@ export default function Cart() {
                   <button
                     className="link-btn remove-btn"
                     onClick={() => handleRemove(item.productId)}
+                    aria-label={`Remove ${item.name} from cart`}
+                    title="Remove"
                   >
-                    Remove
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                      <path
+                        d="M5 7h14M10 11v6M14 11v6M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </button>
                 </li>
               );

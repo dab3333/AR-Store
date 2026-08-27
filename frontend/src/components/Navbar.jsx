@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
@@ -8,7 +8,20 @@ export default function Navbar() {
   const { itemCount } = useCart();
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userMenuOpen) return;
+    const onClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [userMenuOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -19,14 +32,20 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
+    setUserMenuOpen(false);
     logout();
     navigate("/");
+  };
+
+  const closeMenus = () => {
+    setMenuOpen(false);
+    setUserMenuOpen(false);
   };
 
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <Link to="/" className="brand">
+        <Link to="/" className="brand" onClick={closeMenus}>
           Ar Store
         </Link>
 
@@ -52,30 +71,60 @@ export default function Navbar() {
         </button>
 
         <nav className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/" onClick={() => setMenuOpen(false)}>
-            Home
-          </Link>
           {isAdmin && (
-            <Link to="/admin" onClick={() => setMenuOpen(false)}>
+            <Link to="/admin" onClick={closeMenus}>
               Admin
             </Link>
           )}
           {isAuthenticated ? (
             <>
-              <Link to="/cart" onClick={() => setMenuOpen(false)} className="cart-link">
-                Cart{itemCount > 0 ? ` (${itemCount})` : ""}
+              <Link
+                to="/cart"
+                onClick={closeMenus}
+                className="cart-link"
+                aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
+              >
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 8h12l-1.1 10.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8Z"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9 8V6a3 3 0 0 1 6 0v2"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
               </Link>
-              <span className="nav-username">@{username}</span>
-              <button className="link-btn" onClick={handleLogout}>
-                Logout
-              </button>
+
+              <div className="user-menu" ref={userMenuRef}>
+                <button
+                  className="user-menu-trigger"
+                  onClick={() => setUserMenuOpen((o) => !o)}
+                  aria-expanded={userMenuOpen}
+                >
+                  @{username}
+                </button>
+                {userMenuOpen && (
+                  <div className="user-menu-dropdown">
+                    <button className="link-btn" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             <>
-              <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <Link to="/login" onClick={closeMenus}>
                 Login
               </Link>
-              <Link to="/register" onClick={() => setMenuOpen(false)}>
+              <Link to="/register" onClick={closeMenus}>
                 Register
               </Link>
             </>
