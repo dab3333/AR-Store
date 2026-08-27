@@ -45,7 +45,7 @@ export default function Cart() {
   if (error) return <ErrorMessage error={error} />;
 
   return (
-    <div className="container section">
+    <div className="container section cart-page">
       <h1>Your Cart</h1>
       {items.length === 0 ? (
         <EmptyState label="Your cart is empty." />

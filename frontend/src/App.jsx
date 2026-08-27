@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { LikesProvider } from "./context/LikesContext";
 import Layout from "./components/Layout";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 
@@ -28,7 +29,8 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <Routes>
+          <LikesProvider>
+            <Routes>
             <Route element={<Layout />}>
               {/* Public */}
               <Route path="/" element={<Home />} />
@@ -60,7 +62,8 @@ export default function App() {
 
               <Route path="*" element={<NotFound />} />
             </Route>
-          </Routes>
+            </Routes>
+          </LikesProvider>
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>

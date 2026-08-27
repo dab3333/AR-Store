@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCollections, getProducts } from "../api/endpoints";
 import { Loading, ErrorMessage, EmptyState } from "../components/StatusMessage";
+import ProductHoverActions from "../components/ProductHoverActions";
 import { formatPeso } from "../utils/currency";
 
 const TESTIMONIALS = [
@@ -61,6 +62,7 @@ function LegacyProductGrid({ products }) {
           <div className="legacy-product-header">
             {p.featured && <span className="legacy-product-featured-badge">Featured</span>}
             <img src={p.imageUrl || "/placeholder.svg"} alt={p.name} loading="lazy" />
+            <ProductHoverActions product={p} />
           </div>
           <div className="legacy-product-footer">
             <h3>{p.name}</h3>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatPeso } from "../utils/currency";
+import ProductHoverActions from "./ProductHoverActions";
 
 export default function ProductCard({ product }) {
   const outOfStock = (product.stock ?? 0) <= 0;
@@ -13,6 +14,7 @@ export default function ProductCard({ product }) {
         />
         {outOfStock && <span className="badge badge-out">Out of stock</span>}
         {product.featured && !outOfStock && <span className="badge badge-featured">Featured</span>}
+        <ProductHoverActions product={product} />
       </div>
       <div className="product-card-body">
         <h3>{product.name}</h3>
