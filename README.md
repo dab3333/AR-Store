@@ -12,13 +12,15 @@ See [`backend/README.md`](backend/README.md) and [`frontend/README.md`](frontend
 
 ## Running locally
 
-1. Start Postgres:
+1. Start Postgres and Mailpit (a local SMTP catcher, so registration/verification/password-reset emails are viewable in a browser instead of needing real SMTP creds):
 
    ```
    docker compose up -d
    ```
 
-2. Backend (in `backend/`): copy `.env.example` to `.env`, fill in values (defaults match the `docker-compose.yml` Postgres creds), then:
+   Caught emails appear at `http://localhost:8025`.
+
+2. Backend (in `backend/`): copy `.env.example` to `.env`, fill in values (defaults match the `docker-compose.yml` Postgres and Mailpit setup), then:
 
    ```
    mvn spring-boot:run -Dspring-boot.run.profiles=dev,seed

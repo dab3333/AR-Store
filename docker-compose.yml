@@ -11,5 +11,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "1025:1025" # SMTP - point the backend's SMTP_HOST/SMTP_PORT here for local dev
+      - "8025:8025" # Web UI - open http://localhost:8025 to read caught emails
+
 volumes:
   postgres_data:
