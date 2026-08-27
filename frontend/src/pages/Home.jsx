@@ -169,49 +169,55 @@ export default function Home() {
           </section>
 
           {featured.length > 0 && (
-            <section className="section container">
+            <section className="section">
               <div className="product-banner">
                 <div className="banner-img">
                   <img src={featured[0].imageUrl || "/placeholder.svg"} alt="" />
                 </div>
                 <ProductBanner title="Featured Picks" />
               </div>
-              <div className="section-title">
-                <h1>Featured</h1>
+              <div className="container">
+                <div className="section-title">
+                  <h1>Featured</h1>
+                </div>
+                <LegacyProductGrid products={featured} />
               </div>
-              <LegacyProductGrid products={featured} />
             </section>
           )}
 
           {latest.length > 0 && (
-            <section className="section container">
+            <section className="section">
               <div className="product-banner">
                 <div className="banner-img">
                   <img src={latest[0].imageUrl || "/placeholder.svg"} alt="" />
                 </div>
                 <ProductBanner title="Latest Drops" />
               </div>
-              <div className="section-title">
-                <h1>Latest</h1>
+              <div className="container">
+                <div className="section-title">
+                  <h1>Latest</h1>
+                </div>
+                <LegacyProductGrid products={latest} />
               </div>
-              <LegacyProductGrid products={latest} />
             </section>
           )}
 
           {collections.map((c) => {
             const products = productsByCollection[c.id] || [];
             return (
-              <section key={c.id} id={`collection-${c.id}`} className="section container">
+              <section key={c.id} id={`collection-${c.id}`} className="section">
                 <div className="product-banner">
                   <div className="banner-img">
                     <img src={c.imageUrl || "/placeholder.svg"} alt="" />
                   </div>
                   <ProductBanner title={c.name} />
                 </div>
-                <div className="section-title">
-                  <h1>{c.name}</h1>
+                <div className="container">
+                  <div className="section-title">
+                    <h1>{c.name}</h1>
+                  </div>
+                  <LegacyProductGrid products={products} />
                 </div>
-                <LegacyProductGrid products={products} />
               </section>
             );
           })}

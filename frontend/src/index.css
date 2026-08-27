@@ -519,8 +519,8 @@ button, input, select {
   grid-template-columns: 1fr 1fr;
   min-height: 32rem;
   background-color: var(--navy);
-  border-radius: var(--radius);
-  overflow: hidden;
+  width: 100%;
+  margin-bottom: 4rem;
 }
 
 .product-banner .banner-img {
