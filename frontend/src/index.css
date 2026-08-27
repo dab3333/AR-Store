@@ -840,12 +840,12 @@ button, input, select {
   /* this element also carries the shared .container class (max-width +
      auto margins, for centering regular page content) but needs to span
      the full viewport width for its background to reach the edges, and
-     fill the remaining viewport height so the background reaches the
-     footer with no gap - .app-main is a flex item with a definite
-     height, so height:100% resolves against it here */
+     be at least a full viewport tall so the background fills the whole
+     page before the footer starts (rather than just the leftover space
+     under a short form) */
   max-width: none;
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
