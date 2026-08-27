@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { LikesProvider } from "./context/LikesContext";
 import Layout from "./components/Layout";
+import ScrollToTop from "./components/ScrollToTop";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
@@ -30,6 +31,7 @@ export default function App() {
       <AuthProvider>
         <CartProvider>
           <LikesProvider>
+            <ScrollToTop />
             <Routes>
             <Route element={<Layout />}>
               {/* Public */}

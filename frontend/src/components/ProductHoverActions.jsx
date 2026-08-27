@@ -91,7 +91,7 @@ export default function ProductHoverActions({ product }) {
         >
           <svg viewBox="0 0 24 24" width="20" height="20" fill={liked ? "currentColor" : "none"} aria-hidden="true">
             <path
-              d="M12 20.5s-7.5-4.6-9.8-9C.7 8.2 2 4.8 5.2 4.1c2-.4 3.9.5 5 2.2a5.3 5.3 0 0 1 4.6-2.2c3.2.5 4.7 4 3.2 7.4-2.1 4.4-6 6.6-6 9Z"
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"
               stroke="currentColor"
               strokeWidth="1.8"
               strokeLinejoin="round"
