@@ -9,10 +9,12 @@ import { Loading, ErrorMessage, EmptyState } from "../../components/StatusMessag
 import ConfirmModal from "../../components/ConfirmModal";
 import Modal from "../../components/Modal";
 import ImageUploadField from "../../components/ImageUploadField";
+import { useToast } from "../../context/ToastContext";
 
 const emptyForm = { name: "", imageUrl: "" };
 
 export default function AdminCollections() {
+  const { showToast } = useToast();
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -62,8 +64,10 @@ export default function AdminCollections() {
     try {
       if (editingId) {
         await adminUpdateCollection(editingId, form);
+        showToast("Collection updated successfully.");
       } else {
         await adminCreateCollection(form);
+        showToast("Collection added successfully.");
       }
       await load();
       closeModal();
@@ -80,6 +84,7 @@ export default function AdminCollections() {
     try {
       await adminDeleteCollection(pendingDelete.id);
       setPendingDelete(null);
+      showToast("Collection deleted successfully.");
       await load();
     } catch (err) {
       setFormError(err.response?.data?.message || "Could not delete collection.");

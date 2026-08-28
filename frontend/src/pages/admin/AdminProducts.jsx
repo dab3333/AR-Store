@@ -12,6 +12,7 @@ import { Loading, ErrorMessage, EmptyState } from "../../components/StatusMessag
 import ConfirmModal from "../../components/ConfirmModal";
 import Modal from "../../components/Modal";
 import ImageUploadField from "../../components/ImageUploadField";
+import { useToast } from "../../context/ToastContext";
 
 const PAGE_SIZE = 8;
 
@@ -28,6 +29,7 @@ const emptyForm = {
 };
 
 export default function AdminProducts() {
+  const { showToast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -137,8 +139,10 @@ export default function AdminProducts() {
       };
       if (editingId) {
         await adminUpdateProduct(editingId, payload);
+        showToast("Product updated successfully.");
       } else {
         await adminCreateProduct(payload);
+        showToast("Product added successfully.");
       }
       await loadProducts();
       closeModal();
@@ -155,6 +159,7 @@ export default function AdminProducts() {
     try {
       await adminDeleteProduct(pendingDelete.id);
       setPendingDelete(null);
+      showToast("Product deleted successfully.");
       await loadProducts();
     } catch (err) {
       setFormError(err.response?.data?.message || "Could not delete product.");
