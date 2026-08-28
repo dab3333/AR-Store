@@ -3,10 +3,11 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getProduct } from "../api/endpoints";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+import { useLikes } from "../context/LikesContext";
 import { formatPeso } from "../utils/currency";
 import { Loading, ErrorMessage } from "../components/StatusMessage";
 import { flyToCart } from "../utils/flyToCart";
-import { DEFAULT_SIZES, DEFAULT_COLORS, parseOptionList } from "../utils/productOptions";
+import { DEFAULT_SIZES, DEFAULT_COLORS, parseOptionList, colorToSwatch } from "../utils/productOptions";
 
 const REVIEW_POOL = [
   { name: "Jerome T.", text: "Sulit sa presyo, ang lambot ng fabric and true to size pa." },
@@ -38,6 +39,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(null);
   const { isAuthenticated, isAdmin } = useAuth();
   const { addItem } = useCart();
+  const { isLiked, toggleLike } = useLikes();
   const navigate = useNavigate();
   const addingRef = useRef(false);
   const imgRef = useRef(null);
@@ -141,16 +143,22 @@ export default function ProductDetail() {
               <div className="product-option-group">
                 <h4>Color</h4>
                 <div className="product-option-pills">
-                  {colors.map((color) => (
-                    <button
-                      type="button"
-                      key={color}
-                      className={`product-option-pill${color === selectedColor ? " is-selected" : ""}`}
-                      onClick={() => setSelectedColor(color)}
-                    >
-                      {color}
-                    </button>
-                  ))}
+                  {colors.map((color) => {
+                    const swatch = colorToSwatch(color);
+                    return (
+                      <button
+                        type="button"
+                        key={color}
+                        className={`product-option-pill color-pill${color === selectedColor ? " is-selected" : ""}`}
+                        onClick={() => setSelectedColor(color)}
+                      >
+                        {swatch && (
+                          <span className="color-swatch" style={{ backgroundColor: swatch }} />
+                        )}
+                        {color}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -162,13 +170,51 @@ export default function ProductDetail() {
             </button>
           ) : (
             <>
-              <button
-                className="btn btn-primary"
-                onClick={handleAddToCart}
-                disabled={outOfStock || adding}
-              >
-                {adding ? "Adding..." : "Add to Cart"}
-              </button>
+              <div className="product-detail-actions">
+                <button
+                  className="btn btn-cta"
+                  onClick={handleAddToCart}
+                  disabled={outOfStock || adding}
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                    <path
+                      d="M6 8h12l-1.1 10.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8Z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9 8V6a3 3 0 0 1 6 0v2"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {adding ? "Adding..." : "Add to Cart"}
+                </button>
+                <button
+                  type="button"
+                  className={`btn like-toggle-btn${isLiked(product.id) ? " is-active" : ""}`}
+                  onClick={() => toggleLike(product.id)}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill={isLiked(product.id) ? "currentColor" : "none"}
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {isLiked(product.id) ? "Added to Favorites" : "Add to Favorites"}
+                </button>
+              </div>
 
               {message && (
                 <p className={message.type === "success" ? "form-success" : "form-error"}>
