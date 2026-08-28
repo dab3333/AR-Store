@@ -2,6 +2,7 @@
 backend/target/
 backend/.env
 backend/*.log
+backend/uploads/
 
 # Frontend (Node/Vite)
 frontend/node_modules/

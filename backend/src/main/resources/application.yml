@@ -37,6 +37,10 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
 
+spring.servlet.multipart:
+  max-file-size: 8MB
+  max-request-size: 8MB
+
 app:
   jwt:
     secret: ${JWT_SECRET:this-is-a-local-dev-only-secret-key-please-override-in-prod-min-32-bytes}
@@ -54,6 +58,8 @@ app:
     enabled: ${RECAPTCHA_ENABLED:true}
   seed:
     products-xml-path: ${SEED_PRODUCTS_XML_PATH:classpath:seed/products.xml}
+  upload:
+    dir: ${UPLOAD_DIR:uploads}
 
 logging:
   level:

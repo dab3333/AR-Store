@@ -8,6 +8,7 @@ import {
 import { Loading, ErrorMessage, EmptyState } from "../../components/StatusMessage";
 import ConfirmModal from "../../components/ConfirmModal";
 import Modal from "../../components/Modal";
+import ImageUploadField from "../../components/ImageUploadField";
 
 const emptyForm = { name: "", imageUrl: "" };
 
@@ -90,18 +91,13 @@ export default function AdminCollections() {
 
   return (
     <div className="admin-section">
-      <div className="admin-section-toolbar">
-        <button className="btn btn-primary" onClick={openAdd}>
-          + Add collection
-        </button>
-      </div>
-
       {loading && <Loading label="Loading collections..." />}
       {error && <ErrorMessage error={error} />}
       {!loading && !error && collections.length === 0 && (
         <EmptyState label="No collections yet." />
       )}
       {!loading && !error && collections.length > 0 && (
+        <div className="admin-table-scroll">
         <table className="admin-table">
           <thead>
             <tr>
@@ -129,7 +125,14 @@ export default function AdminCollections() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
+
+      <div className="admin-section-toolbar">
+        <button className="btn btn-primary" onClick={openAdd}>
+          + Add collection
+        </button>
+      </div>
 
       {modalOpen && (
         <Modal title={editingId ? "Edit collection" : "Add collection"} onClose={() => setModalOpen(false)} wide>
@@ -146,15 +149,13 @@ export default function AdminCollections() {
                     onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                   />
                 </div>
-                <div className="form-field">
-                  <label htmlFor="col-image">Image URL</label>
-                  <input
-                    id="col-image"
-                    value={form.imageUrl}
-                    onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-                    placeholder="/uploads/example.png"
-                  />
-                </div>
+                <ImageUploadField
+                  id="col-image"
+                  label="Image"
+                  value={form.imageUrl}
+                  onChange={(url) => setForm((f) => ({ ...f, imageUrl: url }))}
+                  showThumbnail={false}
+                />
                 {formError && <p className="form-error">{formError}</p>}
                 <div className="modal-actions">
                   <button type="button" className="btn btn-secondary" onClick={closeModal}>

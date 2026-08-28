@@ -9,6 +9,7 @@ import {
 import { formatPeso } from "../../utils/currency";
 import { Loading, ErrorMessage, EmptyState } from "../../components/StatusMessage";
 import ConfirmModal from "../../components/ConfirmModal";
+import ImageUploadField from "../../components/ImageUploadField";
 
 const emptyForm = {
   name: "",
@@ -140,14 +141,12 @@ export default function AdminProducts() {
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
           />
         </div>
-        <div className="form-field">
-          <label htmlFor="p-image">Image URL</label>
-          <input
-            id="p-image"
-            value={form.imageUrl}
-            onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-          />
-        </div>
+        <ImageUploadField
+          id="p-image"
+          label="Image"
+          value={form.imageUrl}
+          onChange={(url) => setForm((f) => ({ ...f, imageUrl: url }))}
+        />
         <div className="form-row">
           <div className="form-field">
             <label htmlFor="p-price">Price (₱)</label>
