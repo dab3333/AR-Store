@@ -17,12 +17,14 @@ export default function Login() {
     setSubmitting(true);
     try {
       const data = await login(email, password);
-      const from = location.state?.from?.pathname;
-      if (data.role === "ADMIN" && !from) {
+      const isAdmin = data.role === "ADMIN";
+      if (isAdmin) {
         navigate("/admin");
-      } else {
-        navigate(from || "/");
+        return;
       }
+      const from = location.state?.from?.pathname;
+      const canReturnTo = from && !from.startsWith("/admin");
+      navigate(canReturnTo ? from : "/");
     } catch (err) {
       setError(
         err.response?.data?.message || "Invalid email or password. Please try again."

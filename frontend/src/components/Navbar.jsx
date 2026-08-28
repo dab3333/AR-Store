@@ -34,7 +34,7 @@ export default function Navbar() {
   const handleLogout = () => {
     setUserMenuOpen(false);
     logout();
-    navigate("/");
+    navigate("/login");
   };
 
   const closeMenus = () => {
@@ -45,7 +45,14 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <Link to="/" className="brand" onClick={closeMenus}>
+        <Link
+          to="/"
+          className="brand"
+          onClick={() => {
+            closeMenus();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           Ar Store
         </Link>
 
