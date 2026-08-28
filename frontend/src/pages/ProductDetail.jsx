@@ -20,6 +20,17 @@ function pickReviews(seed, count = 3) {
   return Array.from({ length: count }, (_, i) => REVIEW_POOL[(start + i) % REVIEW_POOL.length]);
 }
 
+const DEFAULT_SIZES = "S,M,L,XL";
+const DEFAULT_COLORS = "Black,White";
+
+function parseList(value, fallback) {
+  const raw = value && value.trim() ? value : fallback;
+  return raw
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
 function buildDescription(product) {
   const collection = product.collectionName ? ` from our ${product.collectionName}` : "";
   return `The ${product.name} is a fan-favorite pick${collection}. Printed on soft, breathable cotton with a comfortable unisex fit, it's built to hold up to regular wear and washing without losing its shape or print quality. Whether you're keeping it casual, styling it for a con, or just repping your favorite characters day to day, it's an easy shirt to reach for.`;
@@ -32,7 +43,7 @@ export default function ProductDetail() {
   const [error, setError] = useState(null);
   const [adding, setAdding] = useState(false);
   const [message, setMessage] = useState(null);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   const { addItem } = useCart();
   const navigate = useNavigate();
 
@@ -55,6 +66,10 @@ export default function ProductDetail() {
       cancelled = true;
     };
   }, [id]);
+
+  const handleEdit = () => {
+    navigate("/admin/products", { state: { editProductId: product.id } });
+  };
 
   const handleAddToCart = async () => {
     if (!isAuthenticated) {
@@ -81,6 +96,8 @@ export default function ProductDetail() {
   if (!product) return null;
 
   const outOfStock = (product.stock ?? 0) <= 0;
+  const sizes = parseList(product.sizes, DEFAULT_SIZES);
+  const colors = parseList(product.colors, DEFAULT_COLORS);
 
   return (
     <div className="container section product-detail">
@@ -101,18 +118,26 @@ export default function ProductDetail() {
             {outOfStock ? "Out of stock" : `${product.stock} in stock`}
           </p>
 
-          <button
-            className="btn btn-primary"
-            onClick={handleAddToCart}
-            disabled={outOfStock || adding}
-          >
-            {adding ? "Adding..." : "Add to Cart"}
-          </button>
+          {isAdmin ? (
+            <button className="btn btn-primary" onClick={handleEdit}>
+              Edit product
+            </button>
+          ) : (
+            <>
+              <button
+                className="btn btn-primary"
+                onClick={handleAddToCart}
+                disabled={outOfStock || adding}
+              >
+                {adding ? "Adding..." : "Add to Cart"}
+              </button>
 
-          {message && (
-            <p className={message.type === "success" ? "form-success" : "form-error"}>
-              {message.text}
-            </p>
+              {message && (
+                <p className={message.type === "success" ? "form-success" : "form-error"}>
+                  {message.text}
+                </p>
+              )}
+            </>
           )}
 
           <div className="product-description">
@@ -120,18 +145,41 @@ export default function ProductDetail() {
             <p>{buildDescription(product)}</p>
           </div>
 
-          <div className="product-reviews">
-            <h3>Customer Reviews</h3>
-            <div className="product-reviews-list">
-              {pickReviews(product.id).map((r) => (
-                <div key={r.name} className="product-review">
-                  <div className="rating">★★★★★</div>
-                  <p>&ldquo;{r.text}&rdquo;</p>
-                  <span className="product-review-author">{r.name}</span>
-                </div>
-              ))}
+          <div className="product-options">
+            <div className="product-option-group">
+              <h4>Available sizes</h4>
+              <div className="product-option-pills">
+                {sizes.map((size) => (
+                  <span key={size} className="product-option-pill">
+                    {size}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="product-option-group">
+              <h4>Available colors</h4>
+              <div className="product-option-pills">
+                {colors.map((color) => (
+                  <span key={color} className="product-option-pill">
+                    {color}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="product-reviews">
+        <h3>Customer Reviews</h3>
+        <div className="product-reviews-list">
+          {pickReviews(product.id).map((r) => (
+            <div key={r.name} className="product-review">
+              <div className="rating">★★★★★</div>
+              <p>&ldquo;{r.text}&rdquo;</p>
+              <span className="product-review-author">{r.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

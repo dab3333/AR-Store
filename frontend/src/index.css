@@ -902,9 +902,19 @@ button, input, select {
 }
 
 .product-detail-img {
+  aspect-ratio: 1 / 1;
   background-color: var(--sky-light);
   border-radius: var(--radius);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-detail-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .product-detail-info h1 {
@@ -935,7 +945,12 @@ button, input, select {
   margin-bottom: 1rem;
 }
 
-.product-description,
+.product-description {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
+}
+
 .product-reviews {
   margin-top: 2.8rem;
   padding-top: 2.4rem;
@@ -953,10 +968,48 @@ button, input, select {
   line-height: 1.7;
 }
 
-.product-reviews-list {
+.product-options {
+  margin-top: 1.4rem;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.product-option-group h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+  margin-bottom: 0.8rem;
+}
+
+.product-option-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.product-option-pill {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--sky-light);
+  color: var(--navy);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.product-reviews-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
+}
+
+@media (max-width: 640px) {
+  .product-reviews-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .product-review {
@@ -1442,6 +1495,58 @@ button, input, select {
   margin-bottom: 1.6rem;
 }
 
+.admin-filter-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.admin-filter-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-filter-select label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+}
+
+.admin-filter-select select {
+  min-width: 22rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border);
+  background: var(--white);
+  font-size: 1.4rem;
+  color: var(--navy);
+}
+
+.admin-filter-count {
+  font-size: 1.3rem;
+  color: var(--gray);
+  padding-bottom: 0.4rem;
+}
+
+.admin-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.admin-pagination-label {
+  font-size: 1.3rem;
+  color: var(--gray);
+}
+
 .admin-table-scroll {
   max-height: 60vh;
   overflow-y: auto;
@@ -1612,17 +1717,36 @@ button, input, select {
 }
 
 .modal-form-preview-img {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   border-radius: 1rem;
   overflow: hidden;
-  background-color: var(--sky-light);
+  background-color: var(--white);
   border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .modal-form-preview-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+}
+
+.modal-form-preview-img.is-empty {
+  background-color: var(--sky-light);
+  border: 1px dashed var(--border);
+  box-shadow: none;
+}
+
+.modal-form-preview-empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--gray);
+  font-size: 1.3rem;
 }
 
 @media (max-width: 640px) {
