@@ -10,12 +10,28 @@ The legacy PHP/XML app this was migrated from has been removed. Its product cata
 
 See [`backend/README.md`](backend/README.md) and [`frontend/README.md`](frontend/README.md) for stack details, environment variables, and design notes/deviations from the migration spec.
 
-## Running locally
+## Running with Docker (recommended for a fresh machine)
 
-1. Start Postgres and Mailpit (a local SMTP catcher, so registration/verification/password-reset emails are viewable in a browser instead of needing real SMTP creds):
+The whole stack — Postgres, Mailpit, backend, and frontend — is containerized. From the repo root:
+
+```
+docker compose up -d --build
+```
+
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:8080/api`
+- Mailpit (caught emails): `http://localhost:8025`
+
+First run seeds the product catalog and creates a seed admin (`admin` / `ChangeMe123!` — change it). `RECAPTCHA_ENABLED` defaults to `false` for this Docker setup so registration works without a real reCAPTCHA key; override any of the values in `docker-compose.yml`'s `backend`/`frontend` sections (or export matching env vars before running the command above) for a real reCAPTCHA secret/site key, a real SMTP provider, a non-default `JWT_SECRET`, etc.
+
+To rebuild after pulling code changes: `docker compose up -d --build`. To stop everything: `docker compose down` (add `-v` to also wipe the Postgres/uploads volumes).
+
+## Running locally without Docker
+
+1. Start Postgres and Mailpit only:
 
    ```
-   docker compose up -d
+   docker compose up -d postgres mailpit
    ```
 
    Caught emails appear at `http://localhost:8025`.
