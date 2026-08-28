@@ -33,7 +33,7 @@ function StarRating({ value = 5 }) {
   );
 }
 
-function ProductBanner({ title, discount = "70%" }) {
+function ProductBanner({ title, discount = "70%", targetId = "collections" }) {
   return (
     <div className="banner-text">
       <h2>
@@ -44,7 +44,7 @@ function ProductBanner({ title, discount = "70%" }) {
         <span>{title}</span>
         <span className="discount">Now!</span>
       </h1>
-      <a href="#collections" className="btn">
+      <a href={`#${targetId}`} className="btn">
         Shop now
       </a>
     </div>
@@ -176,12 +176,12 @@ export default function Home() {
           </section>
 
           {featured.length > 0 && (
-            <section className="section">
+            <section id="featured" className="section">
               <div className="product-banner">
                 <div className="banner-img">
                   <img src={featured[0].imageUrl || "/placeholder.svg"} alt="" />
                 </div>
-                <ProductBanner title="Featured Picks" />
+                <ProductBanner title="Featured Picks" targetId="featured" />
               </div>
               <div className="container">
                 <div className="section-title">
@@ -193,12 +193,12 @@ export default function Home() {
           )}
 
           {latest.length > 0 && (
-            <section className="section">
+            <section id="latest" className="section">
               <div className="product-banner">
                 <div className="banner-img">
                   <img src={latest[0].imageUrl || "/placeholder.svg"} alt="" />
                 </div>
-                <ProductBanner title="Latest Drops" />
+                <ProductBanner title="Latest Drops" targetId="latest" />
               </div>
               <div className="container">
                 <div className="section-title">
@@ -217,7 +217,7 @@ export default function Home() {
                   <div className="banner-img">
                     <img src={c.imageUrl || "/placeholder.svg"} alt="" />
                   </div>
-                  <ProductBanner title={c.name} />
+                  <ProductBanner title={c.name} targetId={`collection-${c.id}`} />
                 </div>
                 <div className="container">
                   <div className="section-title">

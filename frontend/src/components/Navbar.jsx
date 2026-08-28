@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
+
+const SCROLL_REVEAL_THRESHOLD = 40;
 
 export default function Navbar() {
   const { isAuthenticated, isAdmin, username, logout } = useAuth();
@@ -9,8 +11,11 @@ export default function Navbar() {
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     if (!userMenuOpen) return;
@@ -22,6 +27,19 @@ export default function Navbar() {
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [userMenuOpen]);
+
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(true);
+      return;
+    }
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_REVEAL_THRESHOLD);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const isOverlay = isHome && !scrolled;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -43,7 +61,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="navbar">
+    <header className={`navbar${isHome ? " navbar-home" : ""}${isOverlay ? " navbar-overlay" : ""}`}>
       <div className="container navbar-inner">
         <Link
           to="/"
@@ -90,6 +108,7 @@ export default function Navbar() {
                   to="/cart"
                   onClick={closeMenus}
                   className="cart-link"
+                  id="cart-icon"
                   aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
                 >
                   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
@@ -121,7 +140,36 @@ export default function Navbar() {
                 </button>
                 {userMenuOpen && (
                   <div className="user-menu-dropdown">
-                    <button className="link-btn" onClick={handleLogout}>
+                    {!isAdmin && (
+                      <Link to="/liked" className="user-menu-item" onClick={closeMenus}>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                          <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        Liked products
+                      </Link>
+                    )}
+                    <button type="button" className="user-menu-item" onClick={handleLogout}>
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+                        <path
+                          d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M16 17l5-5-5-5M21 12H9"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                       Logout
                     </button>
                   </div>

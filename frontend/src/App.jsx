@@ -2,14 +2,18 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { LikesProvider } from "./context/LikesContext";
+import { ToastProvider } from "./context/ToastContext";
 import Layout from "./components/Layout";
+import ToastContainer from "./components/ToastContainer";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollbarAutoHide from "./components/ScrollbarAutoHide";
 import { ProtectedRoute, AdminRoute } from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import CollectionDetail from "./pages/CollectionDetail";
 import Search from "./pages/Search";
 import ProductDetail from "./pages/ProductDetail";
+import LikedProducts from "./pages/LikedProducts";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VerifyEmail from "./pages/VerifyEmail";
@@ -31,7 +35,10 @@ export default function App() {
       <AuthProvider>
         <CartProvider>
           <LikesProvider>
+          <ToastProvider>
             <ScrollToTop />
+            <ScrollbarAutoHide />
+            <ToastContainer />
             <Routes>
             <Route element={<Layout />}>
               {/* Public */}
@@ -39,6 +46,7 @@ export default function App() {
               <Route path="/collections/:id" element={<CollectionDetail />} />
               <Route path="/search" element={<Search />} />
               <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/liked" element={<LikedProducts />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/verify" element={<VerifyEmail />} />
@@ -65,6 +73,7 @@ export default function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
             </Routes>
+          </ToastProvider>
           </LikesProvider>
         </CartProvider>
       </AuthProvider>
