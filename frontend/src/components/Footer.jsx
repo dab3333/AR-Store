@@ -57,29 +57,19 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <div className="footer-brand">
-          <div className="footer-logo">Ar Store</div>
-          <p className="footer-tag">Affordable, customized T-shirts for anime, games, and pop-culture fans.</p>
-        </div>
-
-        <div className="footer-connect">
-          <h4>Connect with us</h4>
-          <ul className="footer-socials">
-            {socials.map((s) => (
-              <li key={s.name}>
-                <a href={s.href} className={s.className} target="_blank" rel="noreferrer" aria-label={s.name}>
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-                    {s.icon}
-                  </svg>
-                </a>
-                <div className="footer-social-text">
-                  <span className="footer-social-name">{s.name}</span>
-                  <span className="footer-social-handle">{s.handle}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="footer-logo">Ar Store</div>
+        <p className="footer-tag">Affordable, customized T-shirts for anime, games, and pop-culture fans.</p>
+        <ul className="footer-socials">
+          {socials.map((s) => (
+            <li key={s.name}>
+              <a href={s.href} className={s.className} target="_blank" rel="noreferrer" aria-label={s.name}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  {s.icon}
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="footer-bottom">
         <div className="container">&copy; {new Date().getFullYear()} Ar Store. All rights reserved.</div>
