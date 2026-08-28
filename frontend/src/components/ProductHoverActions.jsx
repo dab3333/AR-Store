@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext";
 import { useLikes } from "../context/LikesContext";
 
 export default function ProductHoverActions({ product }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   const { addItem } = useCart();
   const { isLiked, toggleLike } = useLikes();
   const navigate = useNavigate();
@@ -40,6 +40,39 @@ export default function ProductHoverActions({ product }) {
     e.stopPropagation();
     toggleLike(product.id);
   };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/admin/products", { state: { editProductId: product.id } });
+  };
+
+  if (isAdmin) {
+    return (
+      <ul className="product-hover-icons">
+        <li>
+          <button type="button" onClick={handleEdit} aria-label="Edit product" title="Edit product">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+              <path
+                d="M4 20h4L18.5 9.5a2.12 2.12 0 0 0-3-3L5 17v3Z"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M14 6l4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    );
+  }
 
   return (
     <ul className="product-hover-icons">
