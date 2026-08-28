@@ -57,6 +57,8 @@ public class DataSeeder implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(DataSeeder.class);
     private static final Set<String> VIRTUAL_COLLECTION_IDS = Set.of("featured", "latest");
     private static final String SEED_ADMIN_PASSWORD = "ChangeMe123!"; // see README for how to rotate this
+    private static final String DEFAULT_SIZES = "S,M,L,XL";
+    private static final String DEFAULT_COLORS = "Black,White";
 
     private final CollectionRepository collectionRepository;
     private final ProductRepository productRepository;
@@ -213,8 +215,9 @@ public class DataSeeder implements CommandLineRunner {
         product.setPrice(parsePrice(childText(productEl, "price")));
         product.setStock(parseInt(childText(productEl, "stock"), 0));
         product.setRating(parseIntOrNull(childText(productEl, "rating")));
-        product.setExternalUrl(childText(productEl, "url"));
         product.setFeatured(false);
+        product.setSizes(DEFAULT_SIZES);
+        product.setColors(DEFAULT_COLORS);
         return product;
     }
 

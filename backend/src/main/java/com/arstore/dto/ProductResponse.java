@@ -13,8 +13,9 @@ public record ProductResponse(
         BigDecimal price,
         int stock,
         Integer rating,
-        String externalUrl,
-        boolean featured
+        boolean featured,
+        String sizes,
+        String colors
 ) {
     public static ProductResponse from(Product p) {
         return new ProductResponse(
@@ -26,8 +27,9 @@ public record ProductResponse(
                 p.getPrice(),
                 p.getStock(),
                 p.getRating(),
-                p.getExternalUrl(),
-                p.isFeatured()
+                p.isFeatured(),
+                p.getSizes(),
+                p.getColors()
         );
     }
 }

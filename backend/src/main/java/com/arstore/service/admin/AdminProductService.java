@@ -85,7 +85,8 @@ public class AdminProductService {
         product.setPrice(request.price());
         product.setStock(request.stock());
         product.setRating(request.rating());
-        product.setExternalUrl(request.externalUrl());
         product.setFeatured(request.featured());
+        product.setSizes(request.sizes());
+        product.setColors(request.colors());
     }
 }

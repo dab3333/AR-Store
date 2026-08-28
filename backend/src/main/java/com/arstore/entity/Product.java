@@ -29,11 +29,16 @@ public class Product {
 
     private Integer rating;
 
-    @Column(name = "external_url", length = 1000)
-    private String externalUrl;
-
     @Column(nullable = false)
     private boolean featured = false;
+
+    /** Comma-separated list, e.g. "S,M,L,XL". */
+    @Column(length = 200)
+    private String sizes;
+
+    /** Comma-separated list, e.g. "Black,White,Navy". */
+    @Column(length = 200)
+    private String colors;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -56,9 +61,12 @@ public class Product {
     public Integer getRating() { return rating; }
     public void setRating(Integer rating) { this.rating = rating; }
 
-    public String getExternalUrl() { return externalUrl; }
-    public void setExternalUrl(String externalUrl) { this.externalUrl = externalUrl; }
-
     public boolean isFeatured() { return featured; }
     public void setFeatured(boolean featured) { this.featured = featured; }
+
+    public String getSizes() { return sizes; }
+    public void setSizes(String sizes) { this.sizes = sizes; }
+
+    public String getColors() { return colors; }
+    public void setColors(String colors) { this.colors = colors; }
 }

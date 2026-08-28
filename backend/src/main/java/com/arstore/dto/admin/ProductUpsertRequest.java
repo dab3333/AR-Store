@@ -14,7 +14,8 @@ public record ProductUpsertRequest(
         @NotNull @DecimalMin(value = "0.0", inclusive = true) BigDecimal price,
         @Min(0) int stock,
         Integer rating,
-        String externalUrl,
-        boolean featured
+        boolean featured,
+        String sizes,
+        String colors
 ) {
 }
