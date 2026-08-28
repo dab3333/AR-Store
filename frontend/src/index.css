@@ -599,13 +599,63 @@ button, input, select {
     min-height: 100dvh;
     flex-direction: column;
     justify-content: center;
+    background-color: var(--navy);
   }
+
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    filter: blur(2px);
+  }
+
+  .hero::before {
+    width: 55vw;
+    height: 55vw;
+    max-width: 26rem;
+    max-height: 26rem;
+    background: var(--salmon);
+    opacity: 0.9;
+    top: -14vw;
+    left: -16vw;
+    border-radius: 44% 56% 62% 38% / 48% 40% 60% 52%;
+  }
+
+  .hero::after {
+    width: 40vw;
+    height: 40vw;
+    max-width: 19rem;
+    max-height: 19rem;
+    background: var(--gold);
+    opacity: 0.92;
+    bottom: -10vw;
+    right: -10vw;
+    border-radius: 58% 42% 40% 60% / 55% 60% 40% 45%;
+  }
+
   .hero-img {
     display: none;
   }
+
   .hero-content {
     text-align: center;
     max-width: none;
+  }
+
+  .hero-content h1 span {
+    color: var(--white);
+    text-shadow: none;
+  }
+
+  .hero-content .btn {
+    background-color: var(--white);
+    color: var(--navy);
+  }
+
+  .navbar-overlay .brand,
+  .navbar-overlay .account-menu-trigger {
+    color: var(--white);
   }
 }
 
