@@ -7,6 +7,7 @@ import {
 } from "../../api/endpoints";
 import { Loading, ErrorMessage, EmptyState } from "../../components/StatusMessage";
 import ConfirmModal from "../../components/ConfirmModal";
+import Modal from "../../components/Modal";
 
 const emptyForm = { name: "", imageUrl: "" };
 
@@ -14,6 +15,7 @@ export default function AdminCollections() {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
   const [formError, setFormError] = useState(null);
@@ -38,18 +40,21 @@ export default function AdminCollections() {
     load();
   }, []);
 
-  const resetForm = () => {
+  const openAdd = () => {
     setForm(emptyForm);
     setEditingId(null);
     setFormError(null);
+    setModalOpen(true);
   };
 
-  const handleEdit = (collection) => {
+  const openEdit = (collection) => {
     setEditingId(collection.id);
     setForm({ name: collection.name || "", imageUrl: collection.imageUrl || "" });
+    setFormError(null);
+    setModalOpen(true);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, closeModal) => {
     e.preventDefault();
     setFormError(null);
     setSubmitting(true);
@@ -59,8 +64,8 @@ export default function AdminCollections() {
       } else {
         await adminCreateCollection(form);
       }
-      resetForm();
       await load();
+      closeModal();
     } catch (err) {
       setFormError(err.response?.data?.message || "Could not save collection.");
     } finally {
@@ -85,37 +90,11 @@ export default function AdminCollections() {
 
   return (
     <div className="admin-section">
-      <form className="admin-form" onSubmit={handleSubmit}>
-        <h2>{editingId ? "Edit collection" : "Add collection"}</h2>
-        <div className="form-field">
-          <label htmlFor="col-name">Name</label>
-          <input
-            id="col-name"
-            required
-            value={form.name}
-            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="col-image">Image URL</label>
-          <input
-            id="col-image"
-            value={form.imageUrl}
-            onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
-          />
-        </div>
-        {formError && <p className="form-error">{formError}</p>}
-        <div className="admin-form-actions">
-          <button className="btn btn-primary" type="submit" disabled={submitting}>
-            {submitting ? "Saving..." : editingId ? "Update collection" : "Add collection"}
-          </button>
-          {editingId && (
-            <button type="button" className="btn btn-secondary" onClick={resetForm}>
-              Cancel
-            </button>
-          )}
-        </div>
-      </form>
+      <div className="admin-section-toolbar">
+        <button className="btn btn-primary" onClick={openAdd}>
+          + Add collection
+        </button>
+      </div>
 
       {loading && <Loading label="Loading collections..." />}
       {error && <ErrorMessage error={error} />}
@@ -139,7 +118,7 @@ export default function AdminCollections() {
                 </td>
                 <td>{c.name}</td>
                 <td className="admin-actions">
-                  <button className="link-btn" onClick={() => handleEdit(c)}>
+                  <button className="link-btn" onClick={() => openEdit(c)}>
                     Edit
                   </button>
                   <button className="link-btn danger" onClick={() => setPendingDelete(c)}>
@@ -150,6 +129,55 @@ export default function AdminCollections() {
             ))}
           </tbody>
         </table>
+      )}
+
+      {modalOpen && (
+        <Modal title={editingId ? "Edit collection" : "Add collection"} onClose={() => setModalOpen(false)} wide>
+          {(closeModal) => (
+            <form className="modal-form-preview" onSubmit={(e) => handleSubmit(e, closeModal)}>
+              <div className="modal-form-fields">
+                <div className="form-field">
+                  <label htmlFor="col-name">Name</label>
+                  <input
+                    id="col-name"
+                    required
+                    autoFocus
+                    value={form.name}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  />
+                </div>
+                <div className="form-field">
+                  <label htmlFor="col-image">Image URL</label>
+                  <input
+                    id="col-image"
+                    value={form.imageUrl}
+                    onChange={(e) => setForm((f) => ({ ...f, imageUrl: e.target.value }))}
+                    placeholder="/uploads/example.png"
+                  />
+                </div>
+                {formError && <p className="form-error">{formError}</p>}
+                <div className="modal-actions">
+                  <button type="button" className="btn btn-secondary" onClick={closeModal}>
+                    Cancel
+                  </button>
+                  <button className="btn btn-primary" type="submit" disabled={submitting}>
+                    {submitting ? "Saving..." : editingId ? "Update collection" : "Add collection"}
+                  </button>
+                </div>
+              </div>
+              <div className="modal-form-preview-pane">
+                <span className="modal-form-preview-label">Preview</span>
+                <div className="modal-form-preview-img">
+                  {form.imageUrl ? (
+                    <img src={form.imageUrl} alt="Preview" onError={(e) => (e.currentTarget.src = "/placeholder.svg")} />
+                  ) : (
+                    <img src="/placeholder.svg" alt="No image yet" />
+                  )}
+                </div>
+              </div>
+            </form>
+          )}
+        </Modal>
       )}
 
       {pendingDelete && (
