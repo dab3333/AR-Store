@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { formatPeso } from "../utils/currency";
 import ProductHoverActions from "./ProductHoverActions";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, className = "" }) {
   const outOfStock = (product.stock ?? 0) <= 0;
   return (
-    <Link to={`/products/${product.id}`} className="product-card">
+    <Link to={`/products/${product.id}`} className={`product-card${className ? ` ${className}` : ""}`}>
       <div className="product-card-img">
         <img
           src={product.imageUrl || "/placeholder.svg"}

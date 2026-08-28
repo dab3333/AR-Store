@@ -1,38 +1,28 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useCart } from "../context/CartContext";
 import { useLikes } from "../context/LikesContext";
+import AddToCartModal from "./AddToCartModal";
 
 export default function ProductHoverActions({ product }) {
   const { isAuthenticated, isAdmin } = useAuth();
-  const { addItem } = useCart();
   const { isLiked, toggleLike } = useLikes();
   const navigate = useNavigate();
-  const [added, setAdded] = useState(false);
-  const [adding, setAdding] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const sourceImgRef = useRef(null);
   const liked = isLiked(product.id);
   const outOfStock = (product.stock ?? 0) <= 0;
 
-  const handleAddToCart = async (e) => {
+  const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (outOfStock || adding) return;
+    if (outOfStock) return;
     if (!isAuthenticated) {
       navigate("/login", { state: { from: { pathname: `/products/${product.id}` } } });
       return;
     }
-    setAdding(true);
-    try {
-      await addItem(product.id);
-      setAdded(true);
-      setTimeout(() => setAdded(false), 1500);
-    } catch {
-      // swallow - the add-to-cart affordance here is a shortcut; errors are
-      // still visible via the full flow on the product detail/cart pages
-    } finally {
-      setAdding(false);
-    }
+    sourceImgRef.current = e.currentTarget.closest("a")?.querySelector("img") || null;
+    setModalOpen(true);
   };
 
   const handleToggleLike = (e) => {
@@ -75,27 +65,16 @@ export default function ProductHoverActions({ product }) {
   }
 
   return (
-    <ul className="product-hover-icons">
-      <li>
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          disabled={outOfStock}
-          aria-label={outOfStock ? "Out of stock" : "Add to cart"}
-          title={outOfStock ? "Out of stock" : "Add to cart"}
-          className={added ? "is-active" : ""}
-        >
-          {added ? (
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
-              <path
-                d="M5 13l4 4L19 7"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          ) : (
+    <>
+      <ul className="product-hover-icons">
+        <li>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={outOfStock}
+            aria-label={outOfStock ? "Out of stock" : "Add to cart"}
+            title={outOfStock ? "Out of stock" : "Add to cart"}
+          >
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
               <path
                 d="M6 8h12l-1.1 10.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8Z"
@@ -111,27 +90,34 @@ export default function ProductHoverActions({ product }) {
                 strokeLinejoin="round"
               />
             </svg>
-          )}
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          onClick={handleToggleLike}
-          aria-label={liked ? "Remove from liked" : "Add to liked"}
-          title={liked ? "Remove from liked" : "Add to liked"}
-          className={liked ? "is-active" : ""}
-        >
-          <svg viewBox="0 0 24 24" width="20" height="20" fill={liked ? "currentColor" : "none"} aria-hidden="true">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </li>
-    </ul>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={handleToggleLike}
+            aria-label={liked ? "Remove from liked" : "Add to liked"}
+            title={liked ? "Remove from liked" : "Add to liked"}
+            className={liked ? "is-active" : ""}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill={liked ? "currentColor" : "none"} aria-hidden="true">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </li>
+      </ul>
+      {modalOpen && (
+        <AddToCartModal
+          product={product}
+          sourceImg={sourceImgRef.current}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
+    </>
   );
 }

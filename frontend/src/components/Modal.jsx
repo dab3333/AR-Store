@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const CLOSE_ANIMATION_MS = 180;
 
@@ -19,12 +20,13 @@ export default function Modal({ title, onClose, wide = false, children }) {
     setTimeout(onClose, CLOSE_ANIMATION_MS);
   };
 
-  return (
+  return createPortal(
     <div
       className={`modal-overlay ${closing ? "is-closing" : ""}`}
       role="dialog"
       aria-modal="true"
       onClick={(e) => {
+        e.stopPropagation();
         if (e.target === e.currentTarget) handleClose();
       }}
     >
@@ -37,6 +39,7 @@ export default function Modal({ title, onClose, wide = false, children }) {
         </div>
         {typeof children === "function" ? children(handleClose) : children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

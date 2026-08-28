@@ -18,10 +18,11 @@ export const searchProducts = (q) => client.get("/products/search", { params: { 
 
 // ---- Cart ----
 export const getCart = () => client.get("/cart");
-export const addCartItem = (productId) => client.post("/cart/items", { productId });
-export const updateCartItem = (productId, change) =>
-  client.patch(`/cart/items/${productId}`, { change });
-export const removeCartItem = (productId) => client.delete(`/cart/items/${productId}`);
+export const addCartItem = (productId, { size, color, qty } = {}) =>
+  client.post("/cart/items", { productId, size, color, qty });
+export const updateCartItem = (itemId, change) =>
+  client.patch(`/cart/items/${itemId}`, { change });
+export const removeCartItem = (itemId) => client.delete(`/cart/items/${itemId}`);
 
 // ---- Checkout ----
 export const checkout = () => client.post("/checkout");

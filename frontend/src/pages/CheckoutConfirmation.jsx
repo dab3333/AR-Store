@@ -35,14 +35,18 @@ export default function CheckoutConfirmation() {
 
           {order.items && order.items.length > 0 && (
             <ul className="order-items">
-              {order.items.map((item) => (
-                <li key={item.productId} className="order-item">
-                  <span>
-                    {item.name} &times; {item.qty}
-                  </span>
-                  <span>{formatPeso(item.price * item.qty)}</span>
-                </li>
-              ))}
+              {order.items.map((item, i) => {
+                const variant = [item.size, item.color].filter(Boolean).join(" / ");
+                return (
+                  <li key={`${item.productId}-${i}`} className="order-item">
+                    <span>
+                      {item.name}
+                      {variant && ` (${variant})`} &times; {item.qty}
+                    </span>
+                    <span>{formatPeso(item.price * item.qty)}</span>
+                  </li>
+                );
+              })}
             </ul>
           )}
 

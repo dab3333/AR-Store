@@ -4,26 +4,37 @@ import { useCart } from "../context/CartContext";
 import { checkout } from "../api/endpoints";
 import { formatPeso } from "../utils/currency";
 import { Loading, ErrorMessage, EmptyState } from "../components/StatusMessage";
+import ConfirmModal from "../components/ConfirmModal";
 
 export default function Cart() {
   const { items, total, loading, error, updateQty, removeItem, refreshCart } = useCart();
   const [checkingOut, setCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState(null);
+  const [pendingRemove, setPendingRemove] = useState(null);
+  const [removing, setRemoving] = useState(false);
   const navigate = useNavigate();
 
-  const handleQtyChange = async (productId, change) => {
+  const handleQtyChange = async (itemId, change) => {
     try {
-      await updateQty(productId, change);
+      await updateQty(itemId, change);
+      setCheckoutError(null);
     } catch (err) {
       setCheckoutError(err.response?.data?.message || "Could not update quantity.");
     }
   };
 
-  const handleRemove = async (productId) => {
+  const handleRemove = async () => {
+    if (!pendingRemove) return;
+    setRemoving(true);
     try {
-      await removeItem(productId);
+      await removeItem(pendingRemove.id);
+      setPendingRemove(null);
+      setCheckoutError(null);
     } catch (err) {
       setCheckoutError(err.response?.data?.message || "Could not remove item.");
+      setPendingRemove(null);
+    } finally {
+      setRemoving(false);
     }
   };
 
@@ -54,8 +65,9 @@ export default function Cart() {
           <ul className="cart-list">
             {items.map((item) => {
               const qty = item.qty ?? item.quantity ?? 1;
+              const variant = [item.size, item.color].filter(Boolean).join(" / ");
               return (
-                <li key={item.productId} className="cart-item">
+                <li key={item.id} className="cart-item">
                   <img
                     src={item.imageUrl || "/placeholder.svg"}
                     alt={item.name}
@@ -63,19 +75,20 @@ export default function Cart() {
                   />
                   <div className="cart-item-info">
                     <Link to={`/products/${item.productId}`}>{item.name}</Link>
+                    {variant && <p className="cart-item-variant">{variant}</p>}
                     <p className="price">{formatPeso(item.price)}</p>
                   </div>
                   <div className="qty-control">
-                    <button onClick={() => handleQtyChange(item.productId, -1)} disabled={qty <= 1}>
+                    <button onClick={() => handleQtyChange(item.id, -1)} disabled={qty <= 1}>
                       -
                     </button>
                     <span>{qty}</span>
-                    <button onClick={() => handleQtyChange(item.productId, 1)}>+</button>
+                    <button onClick={() => handleQtyChange(item.id, 1)}>+</button>
                   </div>
                   <p className="cart-item-subtotal">{formatPeso(item.price * qty)}</p>
                   <button
                     className="link-btn remove-btn"
-                    onClick={() => handleRemove(item.productId)}
+                    onClick={() => setPendingRemove(item)}
                     aria-label={`Remove ${item.name} from cart`}
                     title="Remove"
                   >
@@ -106,6 +119,17 @@ export default function Cart() {
             </button>
           </div>
         </div>
+      )}
+
+      {pendingRemove && (
+        <ConfirmModal
+          title="Remove item"
+          message={`Remove "${pendingRemove.name}" from your cart?`}
+          confirmLabel="Remove"
+          busy={removing}
+          onConfirm={handleRemove}
+          onCancel={() => setPendingRemove(null)}
+        />
       )}
     </div>
   );

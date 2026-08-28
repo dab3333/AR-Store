@@ -10,47 +10,50 @@ export function CartProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const refreshCart = useCallback(async () => {
-    if (!isAuthenticated) {
-      setItems([]);
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const { data } = await getCart();
-      setItems(data.items || data || []);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [isAuthenticated]);
+  const refreshCart = useCallback(
+    async ({ silent = false } = {}) => {
+      if (!isAuthenticated) {
+        setItems([]);
+        return;
+      }
+      if (!silent) setLoading(true);
+      setError(null);
+      try {
+        const { data } = await getCart();
+        setItems(data.items || data || []);
+      } catch (err) {
+        setError(err);
+      } finally {
+        if (!silent) setLoading(false);
+      }
+    },
+    [isAuthenticated]
+  );
 
   useEffect(() => {
     refreshCart();
   }, [refreshCart]);
 
   const addItem = useCallback(
-    async (productId) => {
-      await addCartItem(productId);
-      await refreshCart();
+    async (productId, options) => {
+      await addCartItem(productId, options);
+      await refreshCart({ silent: true });
     },
     [refreshCart]
   );
 
   const updateQty = useCallback(
-    async (productId, change) => {
-      await updateCartItem(productId, change);
-      await refreshCart();
+    async (itemId, change) => {
+      await updateCartItem(itemId, change);
+      await refreshCart({ silent: true });
     },
     [refreshCart]
   );
 
   const removeItem = useCallback(
-    async (productId) => {
-      await removeCartItem(productId);
-      await refreshCart();
+    async (itemId) => {
+      await removeCartItem(itemId);
+      await refreshCart({ silent: true });
     },
     [refreshCart]
   );
@@ -69,10 +72,7 @@ export function CartProvider({ children }) {
     [items]
   );
 
-  const itemCount = useMemo(
-    () => items.reduce((sum, item) => sum + (item.qty ?? item.quantity ?? 1), 0),
-    [items]
-  );
+  const itemCount = useMemo(() => items.length, [items]);
 
   const value = useMemo(
     () => ({
