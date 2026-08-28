@@ -78,29 +78,31 @@ export default function Navbar() {
           )}
           {isAuthenticated ? (
             <>
-              <Link
-                to="/cart"
-                onClick={closeMenus}
-                className="cart-link"
-                aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
-              >
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
-                  <path
-                    d="M6 8h12l-1.1 10.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8Z"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M9 8V6a3 3 0 0 1 6 0v2"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
-              </Link>
+              {!isAdmin && (
+                <Link
+                  to="/cart"
+                  onClick={closeMenus}
+                  className="cart-link"
+                  aria-label={`Cart${itemCount > 0 ? `, ${itemCount} items` : ""}`}
+                >
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                    <path
+                      d="M6 8h12l-1.1 10.2a2 2 0 0 1-2 1.8H9.1a2 2 0 0 1-2-1.8L6 8Z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9 8V6a3 3 0 0 1 6 0v2"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
+                </Link>
+              )}
 
               <div className="user-menu" ref={userMenuRef}>
                 <button
