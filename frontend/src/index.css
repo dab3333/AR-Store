@@ -12,6 +12,7 @@
   --success: #1e8449;
   --radius: 10px;
   --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  --navbar-height: 6.7rem;
 
   /* legacy accent palette, from the original ProgramFiles/style.css */
   --purple: #b888ff;
@@ -31,6 +32,7 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -39,6 +41,44 @@ body {
   font-size: 1.6rem;
   color: var(--navy);
   background-color: var(--white);
+}
+
+/* ---------- Scrollbars ---------- */
+/* Hidden by default; only shown while html.is-scrolling is toggled on scroll (see ScrollbarAutoHide). */
+* {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
+
+html.is-scrolling * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 999px;
+}
+
+html.is-scrolling *::-webkit-scrollbar-thumb {
+  background-color: var(--navy);
+}
+
+html.is-scrolling *::-webkit-scrollbar-thumb:hover {
+  background-color: var(--navy-dark);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 h1, h2, h3, h4 {
@@ -170,6 +210,54 @@ button, input, select {
   top: 0;
   z-index: 50;
   box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* On the homepage the navbar overlays the hero: fixed + transparent at the
+   very top, then fades to the normal solid navbar once the user scrolls. */
+.navbar-home {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.navbar-overlay {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.navbar-overlay .brand,
+.navbar-overlay .cart-link,
+.navbar-overlay .user-menu-trigger,
+.navbar-overlay .navbar-links a,
+.navbar-overlay .navbar-links .link-btn,
+.navbar-overlay .hamburger {
+  color: var(--navy);
+  transition: color 0.3s ease;
+}
+
+.navbar-overlay .navbar-links a:hover,
+.navbar-overlay .navbar-links .link-btn:hover,
+.navbar-overlay .user-menu-trigger:hover {
+  color: var(--navy-dark);
+}
+
+.navbar-overlay .navbar-search {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.navbar-search {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.home {
+  padding-top: var(--navbar-height);
 }
 
 .home section[id] {
@@ -273,6 +361,33 @@ button, input, select {
   line-height: 1;
 }
 
+.fly-to-cart-clone {
+  position: fixed;
+  z-index: 9999;
+  margin: 0;
+  border-radius: 8px;
+  object-fit: cover;
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+  will-change: transform, opacity;
+}
+
+@keyframes cart-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cart-link.cart-bump svg {
+  animation: cart-bump 0.3s ease;
+}
+
 .user-menu {
   position: relative;
 }
@@ -299,21 +414,35 @@ button, input, select {
   border-radius: 6px;
   box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.18);
   padding: 0.6rem;
-  min-width: 12rem;
+  min-width: max-content;
   z-index: 60;
 }
 
-.user-menu-dropdown .link-btn {
-  color: var(--navy) !important;
+.user-menu-dropdown .user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   width: 100%;
   text-align: left;
-  padding: 0.6rem 0.8rem;
+  padding: 0.8rem 1.2rem;
+  color: var(--navy);
+  background: none;
+  border: none;
   text-decoration: none;
+  font-size: 1.4rem;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 6px;
 }
 
-.user-menu-dropdown .link-btn:hover {
+.user-menu-item svg {
+  flex-shrink: 0;
+  color: var(--gray);
+}
+
+.user-menu-item:hover {
   background-color: var(--sky-light);
-  border-radius: 4px;
 }
 
 @media (max-width: 900px) {
@@ -341,7 +470,8 @@ button, input, select {
 .hero {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 6.7rem);
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--navbar-height));
   background-color: var(--sky);
   overflow: hidden;
   display: flex;
@@ -746,12 +876,19 @@ button, input, select {
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: transform 0.15s;
+  transition: transform 0.15s, opacity 0.28s ease, box-shadow 0.28s ease;
   display: block;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
+}
+
+.product-card.is-removing {
+  opacity: 0;
+  transform: scale(0.92);
+  box-shadow: none;
+  pointer-events: none;
 }
 
 .product-card-img {
@@ -970,6 +1107,7 @@ button, input, select {
 
 .product-options {
   margin-top: 1.4rem;
+  margin-bottom: 1.8rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -998,6 +1136,19 @@ button, input, select {
   color: var(--navy);
   font-size: 1.3rem;
   font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.product-option-pill:hover {
+  border-color: var(--navy);
+}
+
+.product-option-pill.is-selected {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
 }
 
 .product-reviews-list {
@@ -1237,8 +1388,9 @@ button, input, select {
 }
 
 /* ---------- Cart ---------- */
-.cart-page {
-  min-height: calc(100vh - 6.7rem);
+.cart-page,
+.liked-page {
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 .cart-layout {
@@ -1255,7 +1407,7 @@ button, input, select {
 
 .cart-item {
   display: grid;
-  grid-template-columns: 8rem 1fr auto auto auto;
+  grid-template-columns: 8rem 1fr 11rem 9rem 4rem;
   gap: 2rem;
   align-items: center;
   padding: 2rem 0;
@@ -1286,9 +1438,16 @@ button, input, select {
   margin: 0.3rem 0 0;
 }
 
+.cart-item-variant {
+  font-size: 1.2rem;
+  color: var(--gray);
+  margin: 0.2rem 0 0;
+}
+
 .qty-control {
   display: flex;
   align-items: center;
+  justify-self: start;
   gap: 0;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -1323,14 +1482,16 @@ button, input, select {
 
 .cart-item-subtotal {
   font-weight: 700;
-  min-width: 7rem;
+  justify-self: end;
   text-align: right;
+  margin: 0;
 }
 
 .remove-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  justify-self: center;
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
@@ -1385,6 +1546,29 @@ button, input, select {
       "img qty"
       "img total"
       "img remove";
+  }
+
+  .cart-item-img {
+    grid-area: img;
+  }
+
+  .cart-item-info {
+    grid-area: info;
+  }
+
+  .qty-control {
+    grid-area: qty;
+    justify-self: start;
+  }
+
+  .cart-item-subtotal {
+    grid-area: total;
+    text-align: left;
+  }
+
+  .remove-btn {
+    grid-area: remove;
+    justify-self: start;
   }
 }
 
@@ -1659,6 +1843,57 @@ button, input, select {
   max-width: 68rem;
 }
 
+.add-to-cart-modal {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  gap: 2.4rem;
+}
+
+.add-to-cart-modal-preview {
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: var(--sky-light);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-cart-modal-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.add-to-cart-modal-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.add-to-cart-modal-body h3 {
+  margin-bottom: 0;
+}
+
+.add-to-cart-modal-body .price {
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .add-to-cart-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .add-to-cart-modal-preview {
+    max-width: 16rem;
+    margin: 0 auto;
+  }
+}
+
 .modal-header {
   display: flex;
   align-items: center;
@@ -1810,44 +2045,31 @@ button, input, select {
 }
 
 .footer-inner {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.6rem;
   padding: 5rem 2rem 3.5rem;
 }
 
 .footer-logo {
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 0.8rem;
 }
 
 .footer-tag {
   opacity: 0.65;
   font-size: 1.4rem;
-  max-width: 36rem;
+  max-width: 40rem;
   line-height: 1.7;
-}
-
-.footer-connect h4 {
-  color: var(--white);
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.6;
-  margin-bottom: 1.8rem;
 }
 
 .footer-socials {
   display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-.footer-socials li {
-  display: flex;
-  align-items: center;
+  justify-content: center;
   gap: 1.2rem;
+  margin-top: 0.6rem;
 }
 
 .footer-socials a {
@@ -1884,33 +2106,12 @@ button, input, select {
   background-color: #0f146d;
 }
 
-.footer-social-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-social-name {
-  font-weight: 600;
-  font-size: 1.4rem;
-}
-
-.footer-social-handle {
-  font-size: 1.2rem;
-  opacity: 0.55;
-}
-
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.8rem 2rem;
   font-size: 1.3rem;
   opacity: 0.55;
   text-align: center;
-}
-
-@media (max-width: 700px) {
-  .footer-inner {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ---------- Not found ---------- */
@@ -1920,4 +2121,70 @@ button, input, select {
 
 .not-found h1 {
   font-size: 6rem;
+}
+
+/* ---------- Toasts ---------- */
+.toast-stack {
+  position: fixed;
+  bottom: 2.4rem;
+  right: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 10000;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 26rem;
+  max-width: 36rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: 0.8rem;
+  background: var(--white);
+  box-shadow: 0 1rem 2.4rem rgba(15, 23, 42, 0.18);
+  border-left: 4px solid var(--success);
+  animation: toast-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-error {
+  border-left-color: var(--danger);
+}
+
+.toast-icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--success);
+}
+
+.toast-error .toast-icon {
+  color: var(--danger);
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 1.4rem;
+  color: var(--navy);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
