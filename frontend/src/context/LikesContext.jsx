@@ -39,7 +39,10 @@ export function LikesProvider({ children }) {
     [likedIds, persist]
   );
 
-  const value = useMemo(() => ({ isLiked, toggleLike }), [isLiked, toggleLike]);
+  const value = useMemo(
+    () => ({ isLiked, toggleLike, likedIds }),
+    [isLiked, toggleLike, likedIds]
+  );
 
   return <LikesContext.Provider value={value}>{children}</LikesContext.Provider>;
 }
