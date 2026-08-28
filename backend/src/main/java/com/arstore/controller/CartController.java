@@ -27,19 +27,19 @@ public class CartController {
     @PostMapping("/items")
     public CartResponse addItem(@AuthenticationPrincipal UserPrincipal principal,
                                  @Valid @RequestBody AddCartItemRequest request) {
-        return cartService.addItem(principal.getId(), request.productId());
+        return cartService.addItem(principal.getId(), request.productId(), request.size(), request.color(), request.qty());
     }
 
-    @PatchMapping("/items/{productId}")
+    @PatchMapping("/items/{itemId}")
     public CartResponse updateItem(@AuthenticationPrincipal UserPrincipal principal,
-                                    @PathVariable Long productId,
+                                    @PathVariable Long itemId,
                                     @Valid @RequestBody UpdateCartItemRequest request) {
-        return cartService.updateItem(principal.getId(), productId, request.change());
+        return cartService.updateItem(principal.getId(), itemId, request.change());
     }
 
-    @DeleteMapping("/items/{productId}")
+    @DeleteMapping("/items/{itemId}")
     public CartResponse removeItem(@AuthenticationPrincipal UserPrincipal principal,
-                                    @PathVariable Long productId) {
-        return cartService.removeItem(principal.getId(), productId);
+                                    @PathVariable Long itemId) {
+        return cartService.removeItem(principal.getId(), itemId);
     }
 }

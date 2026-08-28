@@ -42,7 +42,7 @@ public class CheckoutService {
         User user = userRepository.findById(userId).orElseThrow(() -> ApiException.notFound("User not found"));
         Cart cart = cartRepository.findByUser(user).orElseThrow(() -> ApiException.badRequest("Cart is empty"));
 
-        List<CartItem> items = cartItemRepository.findByCart(cart);
+        List<CartItem> items = cartItemRepository.findByCartOrderByIdAsc(cart);
         if (items.isEmpty()) {
             throw ApiException.badRequest("Cart is empty");
         }
@@ -78,6 +78,8 @@ public class CheckoutService {
             orderItem.setNameSnapshot(item.getNameSnapshot());
             orderItem.setPriceSnapshot(item.getPriceSnapshot());
             orderItem.setQty(item.getQty());
+            orderItem.setSize(item.getSize());
+            orderItem.setColor(item.getColor());
             order.getItems().add(orderItem);
 
             total = total.add(item.getPriceSnapshot().multiply(BigDecimal.valueOf(item.getQty())));

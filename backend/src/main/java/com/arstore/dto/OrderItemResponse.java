@@ -9,6 +9,8 @@ public record OrderItemResponse(
         String name,
         BigDecimal price,
         int qty,
+        String size,
+        String color,
         BigDecimal lineTotal
 ) {
     public static OrderItemResponse from(OrderItem item) {
@@ -17,6 +19,8 @@ public record OrderItemResponse(
                 item.getNameSnapshot(),
                 item.getPriceSnapshot(),
                 item.getQty(),
+                item.getSize(),
+                item.getColor(),
                 item.getPriceSnapshot().multiply(BigDecimal.valueOf(item.getQty()))
         );
     }

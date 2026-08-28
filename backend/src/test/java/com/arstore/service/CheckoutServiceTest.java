@@ -77,7 +77,7 @@ class CheckoutServiceTest {
         CartItem item1 = cartItem(cart, lion, 2);
         CartItem item2 = cartItem(cart, zeus, 1);
 
-        when(cartItemRepository.findByCart(cart)).thenReturn(List.of(item1, item2));
+        when(cartItemRepository.findByCartOrderByIdAsc(cart)).thenReturn(List.of(item1, item2));
         when(productRepository.findById(1L)).thenReturn(Optional.of(lion));
         when(productRepository.findById(2L)).thenReturn(Optional.of(zeus));
         when(orderRepository.save(any(Order.class))).thenAnswer(inv -> inv.getArgument(0));
@@ -99,7 +99,7 @@ class CheckoutServiceTest {
         CartItem item1 = cartItem(cart, lion, 2); // wants 2, only 1 available
         CartItem item2 = cartItem(cart, zeus, 1);
 
-        when(cartItemRepository.findByCart(cart)).thenReturn(List.of(item1, item2));
+        when(cartItemRepository.findByCartOrderByIdAsc(cart)).thenReturn(List.of(item1, item2));
         when(productRepository.findById(1L)).thenReturn(Optional.of(lion));
         lenient().when(productRepository.findById(2L)).thenReturn(Optional.of(zeus));
 
@@ -124,7 +124,7 @@ class CheckoutServiceTest {
         CartItem item1 = cartItem(cart, lion, 2);
         CartItem item2 = cartItem(cart, zeus, 1);
 
-        when(cartItemRepository.findByCart(cart)).thenReturn(List.of(item1, item2));
+        when(cartItemRepository.findByCartOrderByIdAsc(cart)).thenReturn(List.of(item1, item2));
         when(productRepository.findById(1L)).thenReturn(Optional.of(lion));
         when(productRepository.findById(2L)).thenReturn(Optional.of(zeus));
 
@@ -138,7 +138,7 @@ class CheckoutServiceTest {
 
     @Test
     void checkoutRejectsWhenCartIsEmpty() {
-        when(cartItemRepository.findByCart(cart)).thenReturn(List.of());
+        when(cartItemRepository.findByCartOrderByIdAsc(cart)).thenReturn(List.of());
         ApiException ex = assertThrows(ApiException.class, () -> checkoutService.checkout(1L));
         assertTrue(ex.getMessage().toLowerCase().contains("empty"));
     }

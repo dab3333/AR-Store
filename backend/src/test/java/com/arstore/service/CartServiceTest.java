@@ -65,14 +65,16 @@ class CartServiceTest {
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(cartRepository.findByUser(user)).thenReturn(Optional.of(cart));
-        when(productRepository.findById(100L)).thenReturn(Optional.of(product));
-        when(cartItemRepository.findByCartAndProduct(cart, product)).thenReturn(Optional.of(item));
-        lenient().when(cartItemRepository.findByCart(cart)).thenAnswer(inv -> List.copyOf(cart.getItems()));
+        lenient().when(productRepository.findById(100L)).thenReturn(Optional.of(product));
+        lenient().when(cartItemRepository.findByCartAndId(cart, 1000L)).thenReturn(Optional.of(item));
+        lenient().when(cartItemRepository.findByCartAndProductAndSizeAndColor(cart, product, "", ""))
+                .thenReturn(Optional.of(item));
+        lenient().when(cartItemRepository.findByCartOrderByIdAsc(cart)).thenAnswer(inv -> List.copyOf(cart.getItems()));
     }
 
     @Test
     void increasingQuantityWithinStockSucceeds() {
-        CartResponse response = cartService.updateItem(1L, 100L, 1); // 3 -> 4, stock is 5
+        CartResponse response = cartService.updateItem(1L, 1000L, 1); // 3 -> 4, stock is 5
         assertEquals(4, item.getQty());
         assertEquals(1, response.items().size());
     }
@@ -80,28 +82,28 @@ class CartServiceTest {
     @Test
     void increasingQuantityBeyondStockIsRejected() {
         // qty 3 + change 3 = 6, but only 5 in stock
-        ApiException ex = assertThrows(ApiException.class, () -> cartService.updateItem(1L, 100L, 3));
+        ApiException ex = assertThrows(ApiException.class, () -> cartService.updateItem(1L, 1000L, 3));
         assertTrue(ex.getMessage().toLowerCase().contains("stock"));
         assertEquals(3, item.getQty(), "quantity must be unchanged after a rejected update");
     }
 
     @Test
     void decreasingQuantityToZeroRemovesTheItem() {
-        cartService.updateItem(1L, 100L, -3); // 3 -> 0
+        cartService.updateItem(1L, 1000L, -3); // 3 -> 0
         verify(cartItemRepository).delete(item);
         assertFalse(cart.getItems().contains(item));
     }
 
     @Test
     void decreasingQuantityBelowZeroAlsoRemovesTheItem() {
-        cartService.updateItem(1L, 100L, -10); // 3 -> -7, treated as removal
+        cartService.updateItem(1L, 1000L, -10); // 3 -> -7, treated as removal
         verify(cartItemRepository).delete(item);
     }
 
     @Test
     void addingAnItemAlreadyAtStockLimitIsRejected() {
         product.setStock(3); // exactly matches current qty
-        ApiException ex = assertThrows(ApiException.class, () -> cartService.addItem(1L, 100L));
+        ApiException ex = assertThrows(ApiException.class, () -> cartService.addItem(1L, 100L, null, null, null));
         assertTrue(ex.getMessage().toLowerCase().contains("stock"));
     }
 }

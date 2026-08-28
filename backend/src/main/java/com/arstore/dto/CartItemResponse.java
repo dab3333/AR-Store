@@ -11,6 +11,8 @@ public record CartItemResponse(
         String imageUrl,
         BigDecimal price,
         int qty,
+        String size,
+        String color,
         BigDecimal lineTotal,
         int availableStock
 ) {
@@ -22,6 +24,8 @@ public record CartItemResponse(
                 item.getProduct().getImageUrl(),
                 item.getPriceSnapshot(),
                 item.getQty(),
+                item.getSize(),
+                item.getColor(),
                 item.getPriceSnapshot().multiply(BigDecimal.valueOf(item.getQty())),
                 item.getProduct().getStock()
         );

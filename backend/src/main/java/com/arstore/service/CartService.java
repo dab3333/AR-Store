@@ -51,19 +51,23 @@ public class CartService {
     }
 
     @Transactional
-    public CartResponse addItem(Long userId, Long productId) {
+    public CartResponse addItem(Long userId, Long productId, String requestedSize, String requestedColor, Integer requestedQty) {
         Cart cart = getOrCreateCart(userId);
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> ApiException.notFound("Product not found: " + productId));
 
-        CartItem item = cartItemRepository.findByCartAndProduct(cart, product).orElse(null);
+        String size = resolveOption(requestedSize, product.getSizes());
+        String color = resolveOption(requestedColor, product.getColors());
+        int addQty = (requestedQty == null || requestedQty < 1) ? 1 : requestedQty;
+
+        CartItem item = cartItemRepository.findByCartAndProductAndSizeAndColor(cart, product, size, color).orElse(null);
         if (item != null) {
-            if (item.getQty() + 1 > product.getStock()) {
+            if (item.getQty() + addQty > product.getStock()) {
                 throw ApiException.badRequest("Not enough stock for " + product.getName());
             }
-            item.setQty(item.getQty() + 1);
+            item.setQty(item.getQty() + addQty);
         } else {
-            if (product.getStock() < 1) {
+            if (product.getStock() < addQty) {
                 throw ApiException.badRequest("Not enough stock for " + product.getName());
             }
             item = new CartItem();
@@ -71,20 +75,32 @@ public class CartService {
             item.setProduct(product);
             item.setNameSnapshot(product.getName());
             item.setPriceSnapshot(product.getPrice());
-            item.setQty(1);
+            item.setQty(addQty);
+            item.setSize(size);
+            item.setColor(color);
             cart.getItems().add(item);
         }
         cartItemRepository.save(item);
         return toResponse(cart);
     }
 
+    /** Falls back to the product's first listed option when the caller didn't select one. */
+    private String resolveOption(String requested, String available) {
+        if (requested != null && !requested.isBlank()) {
+            return requested.trim();
+        }
+        if (available == null || available.isBlank()) {
+            return "";
+        }
+        return available.split(",")[0].trim();
+    }
+
     @Transactional
-    public CartResponse updateItem(Long userId, Long productId, int change) {
+    public CartResponse updateItem(Long userId, Long itemId, int change) {
         Cart cart = getOrCreateCart(userId);
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> ApiException.notFound("Product not found: " + productId));
-        CartItem item = cartItemRepository.findByCartAndProduct(cart, product)
-                .orElseThrow(() -> ApiException.notFound("Item not in cart: " + productId));
+        CartItem item = cartItemRepository.findByCartAndId(cart, itemId)
+                .orElseThrow(() -> ApiException.notFound("Item not in cart: " + itemId));
+        Product product = item.getProduct();
 
         int newQty = item.getQty() + change;
         if (newQty > product.getStock()) {
@@ -101,11 +117,9 @@ public class CartService {
     }
 
     @Transactional
-    public CartResponse removeItem(Long userId, Long productId) {
+    public CartResponse removeItem(Long userId, Long itemId) {
         Cart cart = getOrCreateCart(userId);
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> ApiException.notFound("Product not found: " + productId));
-        cartItemRepository.findByCartAndProduct(cart, product).ifPresent(item -> {
+        cartItemRepository.findByCartAndId(cart, itemId).ifPresent(item -> {
             cart.getItems().remove(item);
             cartItemRepository.delete(item);
         });
@@ -113,7 +127,7 @@ public class CartService {
     }
 
     private CartResponse toResponse(Cart cart) {
-        var items = cartItemRepository.findByCart(cart).stream().map(CartItemResponse::from).toList();
+        var items = cartItemRepository.findByCartOrderByIdAsc(cart).stream().map(CartItemResponse::from).toList();
         BigDecimal total = items.stream()
                 .map(CartItemResponse::lineTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

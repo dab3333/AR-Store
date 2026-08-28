@@ -28,6 +28,12 @@ public class CartItem {
     @Column(nullable = false)
     private int qty;
 
+    @Column(nullable = false, length = 20)
+    private String size = "";
+
+    @Column(nullable = false, length = 40)
+    private String color = "";
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -45,4 +51,10 @@ public class CartItem {
 
     public int getQty() { return qty; }
     public void setQty(int qty) { this.qty = qty; }
+
+    public String getSize() { return size; }
+    public void setSize(String size) { this.size = size; }
+
+    public String getColor() { return color; }
+    public void setColor(String color) { this.color = color; }
 }
