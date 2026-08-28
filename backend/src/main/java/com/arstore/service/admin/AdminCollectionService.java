@@ -26,10 +26,13 @@ public class AdminCollectionService {
 
     @Transactional
     public CollectionResponse create(CollectionUpsertRequest request) {
-        if (collectionRepository.existsById(request.id())) {
-            throw ApiException.conflict("Collection already exists: " + request.id());
+        String id = (request.id() == null || request.id().isBlank())
+                ? "col" + java.util.UUID.randomUUID().toString().replace("-", "").substring(0, 12)
+                : request.id();
+        if (collectionRepository.existsById(id)) {
+            throw ApiException.conflict("Collection already exists: " + id);
         }
-        Collection collection = new Collection(request.id(), request.name(), request.imageUrl());
+        Collection collection = new Collection(id, request.name(), request.imageUrl());
         return CollectionResponse.from(collectionRepository.save(collection));
     }
 

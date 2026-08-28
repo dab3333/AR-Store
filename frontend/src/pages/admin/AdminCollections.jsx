@@ -168,11 +168,29 @@ export default function AdminCollections() {
               </div>
               <div className="modal-form-preview-pane">
                 <span className="modal-form-preview-label">Preview</span>
-                <div className="modal-form-preview-img">
+                <div className={`modal-form-preview-img${form.imageUrl ? "" : " is-empty"}`}>
                   {form.imageUrl ? (
-                    <img src={form.imageUrl} alt="Preview" onError={(e) => (e.currentTarget.src = "/placeholder.svg")} />
+                    <img
+                      key={form.imageUrl}
+                      src={form.imageUrl}
+                      alt="Collection preview"
+                      onError={(e) => (e.currentTarget.style.display = "none")}
+                    />
                   ) : (
-                    <img src="/placeholder.svg" alt="No image yet" />
+                    <div className="modal-form-preview-empty">
+                      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true">
+                        <rect x="3.5" y="4.5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                        <circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" strokeWidth="1.5" />
+                        <path
+                          d="M4.5 16.5 9 12l3 3 3.5-3.5L19.5 16"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <span>No image yet</span>
+                    </div>
                   )}
                 </div>
               </div>
