@@ -52,6 +52,6 @@ export const adminUploadImage = (file) => {
   const formData = new FormData();
   formData.append("file", file);
   return client.post("/admin/uploads", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
+    headers: { "Content-Type": undefined },
   });
 };
